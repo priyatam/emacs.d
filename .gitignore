@@ -1,5 +1,17 @@
-# Compiled
+auto-save-list
+backups
+*~
+.places
+session.*
+tramp
+elpa
+games
+swank
+emms
+site-lisp/adventur-mode
 *.elc
-
-# Packaging
+.DS_Store
+.yas-compiled-snippets.el
 .cask
+/url/
+/var/
