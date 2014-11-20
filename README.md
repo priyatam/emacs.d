@@ -26,7 +26,7 @@ Add this as a package archive source in ~/.emacs.d/init.el:
 	  
 ## Introduction
 
-Emacs is one of the world's oldest and most powerful editors. However, due to its poor user-interface, and [cryptic](http://www.emacswiki.org) documentation, developers eager to learn Clojure choose Sublime, Lighttable, or Intellij. In this guide, I will document my struggles to learn Emacs and port my workflow from Lightable/Vim. 
+Emacs is one of the world's oldest and most powerful editors. However, due to its poor user-interface, and [cryptic](http://www.emacswiki.org) documentation, developers eager to learn Clojure choose Sublime, Lighttable, or [Cursive](https://cursiveclojure.com). In this guide, I will document my struggles to learn Emacs and port my workflow from Lightable to Cider. 
 
 ◊
 
@@ -94,9 +94,7 @@ You're good to go.
 
 **Commands**
 
-With Emacs on Mac OS X, you don't have to learn all the shortcuts right away, since the toolbar provides hints. If you prefer the mouse, feel free to use it.
-
-You do, however, need to master the M-x, C-x set of primitive shortcuts.
+With Emacs on Mac OS X, you don't have to learn all the shortcuts right away, since the toolbar provides hints. If you prefer the mouse, feel free to use it. However, you need to master the M-x, C-x set of primitives.
 
 ## Commands 
 
@@ -106,33 +104,14 @@ Do you want to learn how to open a file, move around the editor (with a mouse or
 
 Me too.
 
-	C-x 0 close current window
+	C-x 0 close current window 
 	C-x 1 close all but current
-	C-x 2 open new BELOW
-	C-x 3 open new ALONGSIDE
+	C-x 2 open new BELOW / split horizontally
+	C-x 3 open new ALONGSIDE / split vertically
 
-Or, in other words …
-
-Remove current buffer:
-
-	C-x-0
-
-Back to single buffer:
-
-	C-x-1
-	
-Split 'buffers’ horizontally:
-
-	C-x-2
-
-Split 'buffers’ vertically:
-
-	C-x-3	
-
-Kill current buffer by name (if you have a super memory)
+Kill current buffer by name
 
 	C-x-k buffname
-	M-x kill-some-buffers
 
 Move across buffers: 
 
@@ -174,12 +153,9 @@ Enter the path of the folder to open
 
 	~/Dev/github/user/clojureapp	
 
-	
 I prefer splitting my screen like this (C-x 3, C-x 2):
-
 	
 ![](/img/cider-three-pane.png)	
-
 
 Start Cider:
 
@@ -189,22 +165,18 @@ Start a dedicated repl:
 
 	Fn-F3
 
-Evaluate form and show value in buffer:
-
-	C-x x
-
 Evaluate current file
 
 	C-c C-k
 
-Evaluate form and show value in echo:
+Evaluate form and show value in status bar:
 
 	C-c z
 	
-I also prefer to open a third buffer to run code in repl.
-	
-	C-c C-z
+Evaluate form and show value in buffer:
 
+	C-x x
+	
 ## Packages
 
 List available packages:
