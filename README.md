@@ -4,40 +4,38 @@ A gentle introduction to Emacs [Cider](https://github.com/clojure-emacs/cider), 
 
 ## Installation
 
-For detailed instructions, see CIDER's [README](https://github.com/clojure-emacs/cider/blob/master/README.md).
+This guide is optimized for OSX.
 
-For brew lovers, install the latest version of Emacs and symlink Emacs.app to your ~/Applications folder with this:
+Brew lovers can install the latest version of Emacs and symlink Emacs.app to `~/Applications`:
 
 	brew install emacs --cocoa --srgb
 	brew linkapps Emacs
+
+For detailed instructions, see CIDER's [README](https://github.com/clojure-emacs/cider/blob/master/README.md).
 
 **Marmalade** is the package manager, built on top of package.el (an older package manager, pre emacs-23). It uses `MELPA`, a standard repo (package archives) for emacs lisp packages.
 
 Add this as a package archive source in ~/.emacs.d/init.el:
 
-    (require 'package)
-    (add-to-list 'package-archives
-        '("marmalade" . "http://marmalade-repo.org/	packages/") t)
-	  (package-initialize)
+```elisp
+(require 'package)
+(add-to-list 'package-archives
+    '("marmalade" . "http://marmalade-repo.org/	packages/") t)
+  (package-initialize)
+```
 	  
 ## Introduction
 
-Emacs is one of the world's oldest and most powerful editors. 
-
-However, due to its poor user-interface, and [cryptic](http://www.emacswiki.org) documentation, developers eager to learn Clojure choose Sublime, Lighttable, or Intellij. In this guide, I will document my struggles to learn Emacs and port my workflow from Lightable/Vim. 
-
-This guide is written for OSX developers.
+Emacs is one of the world's oldest and most powerful editors. However, due to its poor user-interface, and [cryptic](http://www.emacswiki.org) documentation, developers eager to learn Clojure choose Sublime, Lighttable, or Intellij. In this guide, I will document my struggles to learn Emacs and port my workflow from Lightable/Vim. 
 
 ◊
 
 In order to do anything in Emacs, you must first understand these two acronyms.
 
-- M-x (Meta x) is Opt x
-- C-x is Ctrl x
+	M-x (Meta x) is Opt x
+	C-x is Ctrl x
 
-Great. 
-
-Open Emacs app.
+Great. Now open Emacs app.
 
 Typing `M-x` opens a command palette above the status bar. This is where you run custom commands from changing font to installing packages, and your own custom lisp code and shortcuts.
 
@@ -86,7 +84,7 @@ They get added on top of each other.
 
 You can find current buffers from the 'buffers' menu.
 
-**NREPL**
+**nRepl**
 
 Most Clojure IDEs use a [network REPL](https://github.com/clojure/tools.nrepl) to connect to clojure projects. This ensures seamless interaction with local devs and remote devs. With Cider, you can simply open any .clj file from an existing leiningen project and run `M-x cider-jack-in`.
 
@@ -104,14 +102,16 @@ You do, however, need to master the M-x, C-x set of primitive shortcuts.
 
 ### Basics
 
-Assuming you want to learn how to open a file, move around the window (with a mouse or keyboard), install plugins, run commands, split windows, change themes/fonts etc., and evaluate clojure code out of the box ...
+Do you want to learn how to open a file, move around the editor (with a mouse or keyboard), find and install plugins, run commands, split windows, change themes/fonts etc., and evaluate clojure code _out of the box_?
 
-C-x 0 close current window
-C-x 1 close all but current
-C-x 2 open new BELOW
-C-x 3 open new ALONGSIDE
+Me too.
 
-Or, in other words ...
+	C-x 0 close current window
+	C-x 1 close all but current
+	C-x 2 open new BELOW
+	C-x 3 open new ALONGSIDE
+
+Or, in other words …
 
 Remove current buffer:
 
@@ -168,30 +168,39 @@ If you've got this far, you're now able to move around.
 
 Open a browser:
 
-	Fn F1
+	Fn-F1
 	
 Enter the path of the folder to open
 
 	~/Dev/github/user/clojureapp	
 
+	
+I prefer splitting my screen like this (C-x 3, C-x 2):
+
+	
+![](/img/cider-three-pane.png)	
+
+
 Start Cider:
 
-	Fn F2
-	
-I prefer splitting my screen with a results buffer. So let’s open a buffer on the bottom with `C-x 3`.
+	Fn-F2
+
+Start a dedicated repl:
+
+	Fn-F3
 
 Evaluate form and show value in buffer:
 
 	C-x x
 
+Evaluate current file
+
+	C-c C-k
+
 Evaluate form and show value in echo:
 
 	C-c z
 	
-Run current file
-
-	C-c C-k
-
 I also prefer to open a third buffer to run code in repl.
 	
 	C-c C-z
@@ -202,11 +211,13 @@ List available packages:
 
 	M-x package-list-packages
 
-To manually install a package, move the point to line of the package with the keyboard and press 'i' for 'install'. After selecting your favorite packages, press 'x' for 'eXecute' to install.
+To manually install a package, move the point to line number of the package and press 'i' for 'install'. 
 
-If you know what you want, you can also hit Cmd-f to find the package by first chars.
+After selection, press 'x' (eXecute) to install.
 
-There are tons of packages for emacs. Don't waste your time on them right now. You're going to find your way eventually. The basic cider package lets you run any lein clojure project as a nRepl client. You get things like inline docs, paredit, and much more.
+If you know what you want, you can also type Cmd-f to find the package by _first_ characters.
+
+_Note to self_: there are tons of packages for Emacs. Don't waste your time on them right now. You're going to find your way eventually. The default cider IDE comes pre-loaded with most of what you require anyway. You get things like inline docs, paredit, and much more.
 
 Recommended Packages:
 
