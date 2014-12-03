@@ -1,6 +1,6 @@
-# Cider House
+# Cider Light
 
-A gentle introduction to Emacs [Cider](https://github.com/clojure-emacs/cider), for Lighttable Users.
+A lightweight Emacs Cider configuration, with a gentle introduction to Emacs [Cider](https://github.com/clojure-emacs/cider).
 
 ## Installation
 
@@ -26,7 +26,7 @@ Add this as a package archive source in ~/.emacs.d/init.el:
 	  
 ## Introduction
 
-Emacs is one of the world's oldest and most powerful editors. However, due to its poor user-interface, and [cryptic](http://www.emacswiki.org) documentation, developers eager to learn Clojure choose Sublime, Lighttable, or [Cursive](https://cursiveclojure.com). In this guide, I will document my struggles to learn Emacs and port my workflow from Lightable to Cider. 
+Emacs is one of the world's oldest and most powerful editors. However, due to its poor user-interface, and [cryptic](http://www.emacswiki.org) docs, developers new to Clojure choose Sublime, Lighttable, or [Cursive](https://cursiveclojure.com). In this guide I will document my struggles to learn Emacs and port my workflow from Lightable to Cider. 
 
 ◊
 
@@ -35,13 +35,13 @@ In order to do anything in Emacs, you must first understand these two acronyms.
 	M-x (Meta x) is Opt x
 	C-x is Ctrl x
 
-Great. Now open Emacs app.
+Now open Emacs app.
 
-Typing `M-x` opens a command palette above the status bar. This is where you run custom commands from changing font to installing packages, and your own custom lisp code and shortcuts.
+Typing `M-x` opens a command palette above the status bar. This is where you run custom commands from changing font to installing packages, from running your custom lisp code and keyboard shortcuts.
 
 Let's try to install a package. 
 
-Set the paths from shell (or else Emacs OS X won’t understand):
+First, set the paths from shell (or else Emacs OS X won’t understand):
 
 	M-x packge-install
 	_hit RETURN_
@@ -54,10 +54,9 @@ Then add this in your init.el.
 	(exec-path-from-shell-initialize))
 ```
 
-For Clojure development, choose Cider:
+Install Cider:
 
 	M-x package-install
-	_hit RETURN_
 	cider
 
 Emacs will download the required packages from Marmalade and you should see `done` in the status bar.
@@ -72,15 +71,13 @@ Optionally, add a file browser:
 	M-x package-install
 	neotree		
 	
-For additional configuration, copy and paste [init.el](/init.el) into `~/.emacs.d` from this directory. You can override your init.el. Don't worry about what's inside—you're going to learn about writing your own later.  	  
+For additional configuration, copy and paste [init.el](/init.el)  from this directory into your local `~/.emacs.d`. You can override your init.el. Don't worry about what's inside—you're going to learn about writing your own later.  	  
 
 ## Concepts
 
 **Buffers**
 
-You don't have windows in emacs. Everything is a *buffer*.
-
-They get added on top of each other. 
+You don't have windows in emacs. Everything is a *buffer*. They get added on top of each other. 
 
 You can find current buffers from the 'buffers' menu.
 
@@ -88,13 +85,11 @@ You can find current buffers from the 'buffers' menu.
 
 Most Clojure IDEs use a [network REPL](https://github.com/clojure/tools.nrepl) to connect to clojure projects. This ensures seamless interaction with local devs and remote devs. With Cider, you can simply open any .clj file from an existing leiningen project and run `M-x cider-jack-in`.
 
-An nrepl client, configured to the localhost and port, opens up. 
-
-You're good to go.
+An nrepl client, configured to the localhost and port, opens up. Now you're good to code.
 
 **Commands**
 
-With Emacs on Mac OS X, you don't have to learn all the shortcuts right away, since the toolbar provides hints. If you prefer the mouse, feel free to use it. However, you need to master the M-x, C-x set of primitives.
+With Emacs on Mac OS X, you don't have to learn all the shortcuts right away, since the toolbar provides some hints. Feel free to use the mouse. 
 
 ## Commands 
 

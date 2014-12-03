@@ -10,7 +10,7 @@
 	(exec-path-from-shell-initialize))
 
 ;; FONTS
-(set-default-font "Consolas 14")
+(set-default-font "Consolas 16")
 
 (defun increase-font-size ()
   (interactive)
@@ -27,7 +27,7 @@
 
 (toggle-frame-fullscreen)
 
-;; Disable sounds 
+;; DISABLE SOUNDS 
 (setq ring-bell-function 'ignore)
 
 ;; THEMES
@@ -35,9 +35,7 @@
 (load-theme 'zenburn t)
 
 ;; CIDER
-
 (setq cider-repl-pop-to-buffer-on-connect nil)
-
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 
 (setq cider-repl-pop-to-buffer-on-connect nil)
@@ -45,13 +43,13 @@
 (setq cider-stacktrace-default-filters '(java repl tooling dup))
 (setq cider-repl-display-in-current-window t)
 
+; BUGS?
 ;(add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
 ;(add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
 
 ;; Popping-up contextual documentation
 (eval-after-load "cider"
   '(define-key cider-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc))
-
 
 ;; SCROLL 
 ;; scroll one line at a time (less "jumpy" than defaults)
