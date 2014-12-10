@@ -4,26 +4,23 @@
 (add-to-list 'package-archives '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/"))
 (package-initialize)
 
-;; PATHS
-(add-to-list 'exec-path "/usr/local/bin")	
-(when (memq window-system '(mac ns))
-	(exec-path-from-shell-initialize))
+;; PATH
+
+(defun set-exec-path-from-shell-PATH ()
+ (interactive)
+ (let ((path-from-shell (replace-regexp-in-string "[ \t\n]*$" "" (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
+   (setenv "PATH" path-from-shell)
+   (setq exec-path (split-string path-from-shell path-separator))))
+
+(set-exec-path-from-shell-PATH)
+
+;;(add-to-list 'exec-path "/usr/local/bin")
 
 ;; FONTS
-(set-default-font "Consolas 16")
-
-(defun increase-font-size ()
-  (interactive)
-  (set-face-attribute 'default nil :height
-                      (ceiling (* 1.10 (face-attribute 'default :height)))))
-
-(defun decrease-font-size ()
-    (interactive)
-      (set-face-attribute 'default nil :height
-	 (floor (* 0.9 (face-attribute 'default :height)))))
+(set-default-font "Menlo 16")
 
 ;; STARTUP
-(setq default-directory "~/Dev/github/priyatam")
+(setq default-directory "~/github/priyatam")
 
 (toggle-frame-fullscreen)
 
@@ -75,4 +72,13 @@
 (require 'bind-key)
 (bind-key "C-x z" 'cider-eval-last-sexp)
 (bind-key "C-x x" 'cider-pprint-eval-defun-at-point)
+
+;; Clojure Standards
+(require 'whitespace)
+(add-hook 'clojure-mode-hook (lambda () (whitespace-mode t)))
+(add-hook 'clojurescript-mode-hook (lambda () (whitespace-mode t)))
+(setq whitespace-style '(face lines-tail trailing))
+(setq whitespace-line-column 84)
+
+
 
