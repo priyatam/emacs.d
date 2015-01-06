@@ -1,30 +1,40 @@
+
 ;; REPOSITORIES
 
 (require 'package)
-(add-to-list 'package-archives '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/"))
+(add-to-list 'package-archives
+	     '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives
+	     '("tromey" . "http://tromey.com/elpa/") t)
+(add-to-list 'package-archives
+	     '("melpa" . "http://melpa.milkbox.net/packages/"))
+
 (package-initialize)
+
+(when (not package-archive-contents)
+  (package-refresh-contents))
 
 ;; PATH
 
 (defun set-exec-path-from-shell-PATH ()
- (interactive)
- (let ((path-from-shell (replace-regexp-in-string "[ \t\n]*$" "" (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
-   (setenv "PATH" path-from-shell)
-   (setq exec-path (split-string path-from-shell path-separator))))
+  (interactive)
+  (let ((path-from-shell (replace-regexp-in-string "[ \t\n]*$" "" (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
+    (setenv "PATH" path-from-shell)
+    (setq exec-path (split-string path-from-shell path-separator))))
 
 (set-exec-path-from-shell-PATH)
 
 ;;(add-to-list 'exec-path "/usr/local/bin")
 
 ;; FONTS
-(set-default-font "Menlo 16")
+(set-default-font "Source Code Pro 18")
 
 ;; STARTUP
-(setq default-directory "~/github/priyatam")
+(setq default-directory "~/github/quintype")
 
 (toggle-frame-fullscreen)
 
-;; DISABLE SOUNDS 
+;; DISABLE SOUNDS
 (setq ring-bell-function 'ignore)
 
 ;; THEMES
@@ -40,15 +50,14 @@
 (setq cider-stacktrace-default-filters '(java repl tooling dup))
 (setq cider-repl-display-in-current-window t)
 
-; BUGS?
-;(add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
-;(add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
+;; (add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
+;; (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
 
 ;; Popping-up contextual documentation
 (eval-after-load "cider"
   '(define-key cider-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc))
 
-;; SCROLL 
+;; SCROLL
 ;; scroll one line at a time (less "jumpy" than defaults)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
@@ -61,17 +70,29 @@
 ;; Paredit / Rainbow Parens
 (add-hook 'clojure-mode-hook 'paredit-mode)
 (show-paren-mode 1)
-;(global-rainbow-delimiters-mode)
+;;(global-rainbow-delimiters-mode)
+
+;; Autocomplete finder
+(add-hook 'ido-setup-hook
+	  (lambda ()
+	    ;; avoiding need to use arrow keys!
+	    (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+	    (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)))
+
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+
+(setq ido-use-filename-at-point nil)
+
+;; modes
+
+(winner-mode)
 
 ;; Key Bindings
 (global-set-key [f1] 'neotree-dir)
 (global-set-key [f2] 'cider-jack-in)
 (global-set-key [f3] 'cider-switch-to-repl-buffer)
-(global-set-key [f6] 'paredit-mode)
-
-(require 'bind-key)
-(bind-key "C-x z" 'cider-eval-last-sexp)
-(bind-key "C-x x" 'cider-pprint-eval-defun-at-point)
 
 ;; Clojure Standards
 (require 'whitespace)
@@ -80,5 +101,78 @@
 (setq whitespace-style '(face lines-tail trailing))
 (setq whitespace-line-column 84)
 
+;; NEW STUFF ;;
 
+(fset 'gui-diff-last-failure
+      (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([18 97 99 116 117 97 108 58 13 134217734 19 40 61 13 right 201326624 201326624 134217847 134217790 40 103 117 105 45 100 105 102 102 32 25 41] 0 "%d")) arg)))
 
+;; Turn off mouse interface early in startup to avoid momentary display
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+;; (if (fboundp 'fringe-mode) (fringe-mode 0))
+
+;; No splash screen please ... jeez
+(setq inhibit-startup-message t)
+
+;; enable y/n answers
+(fset 'yes-or-no-p 'y-or-n-p)
+
+(defadvice yes-or-no-p (around prevent-dialog activate)
+  "Prevent yes-or-no-p from activating a dialog"
+  (let ((use-dialog-box nil))
+    ad-do-it))
+
+(defadvice y-or-n-p (around prevent-dialog-yorn activate)
+  "Prevent y-or-n-p from activating a dialog"
+  (let ((use-dialog-box nil))
+    ad-do-it))
+
+(global-set-key (kbd "S-C-<left>")  'shrink-window-horizontally)
+(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "S-C-<down>")  'shrink-window)
+(global-set-key (kbd "S-C-<up>")    'enlarge-window)
+(global-set-key (kbd "C-c C-r") 'rename-sgml-tag)
+
+(global-set-key [remap goto-line] 'goto-line)
+(global-set-key (kbd "C-x C-r") 'rename-current-buffer-file)
+(global-set-key (kbd "C-c n") 'cleanup-buffer)
+(global-set-key (kbd "C-x g") 'webjump)
+(global-set-key (kbd "C-x f") 'sudo-find-file)
+
+;; refresh files
+
+(global-auto-revert-mode t)
+
+(setq-default fill-column 80)
+
+(global-set-key (kbd "<S-up>")    'windmove-up)
+(global-set-key (kbd "<S-down>")  'windmove-down)
+(global-set-key (kbd "<S-left>")  'windmove-left)
+(global-set-key (kbd "<S-right>") 'windmove-right)
+
+;; Magit
+
+(setq magit-highlight-whitespace nil)
+
+(global-set-key (kbd "C-c g") 'magit-status)
+
+(global-linum-mode)
+
+;; Custom functions
+
+(defun cleanup-buffer-safe ()
+  "Perform a bunch of safe operations on the whitespace content of a buffer.
+  Does not indent buffer, because it is used for a before-save-hook, and that
+  might be bad."
+  (interactive)
+  (untabify (point-min) (point-max))
+  (delete-trailing-whitespace)
+  (set-buffer-file-coding-system 'utf-8))
+
+(defun cleanup-buffer ()
+  "Perform a bunch of operations on the whitespace content of a buffer.
+Including indent-buffer, which should not be called automatically on save."
+  (interactive)
+  (cleanup-buffer-safe)
+  (indent-region (point-min) (point-max)))
