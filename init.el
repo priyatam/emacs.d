@@ -1,4 +1,3 @@
-
 ;; REPOSITORIES
 
 (require 'package)
@@ -42,6 +41,8 @@
 (load-theme 'zenburn t)
 
 ;; CIDER
+(require 'cider-mode)
+
 (setq cider-repl-pop-to-buffer-on-connect nil)
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 
@@ -50,27 +51,30 @@
 (setq cider-stacktrace-default-filters '(java repl tooling dup))
 (setq cider-repl-display-in-current-window t)
 
+;; (global-company-mode)
+
 ;; (add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
 ;; (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
-
-;; Popping-up contextual documentation
-(eval-after-load "cider"
-  '(define-key cider-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc))
-
-;; SCROLL
-;; scroll one line at a time (less "jumpy" than defaults)
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
-(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
-(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
-(setq scroll-step 1) ;; keyboard scroll one line at a time
-
-;; File Browser / Navigator
-(load "~/.emacs.d/elpa/neotree-0.2.1/neotree.el")
 
 ;; Paredit / Rainbow Parens
 (add-hook 'clojure-mode-hook 'paredit-mode)
 (show-paren-mode 1)
-;;(global-rainbow-delimiters-mode)
+
+;; Popping-up contextual documentation
+;; (eval-after-load "cider"
+;;  '(define-key cider-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc))
+
+;; SCROLL
+;; scroll one line at a time (less "jumpy" than defaults)
+;; (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+;; (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+;; (setq scroll-step 1) ;; keyboard scroll one line at a time
+
+;; File Browser / Navigator
+(load "~/.emacs.d/elpa/neotree-0.2.1/neotree.el")
+
+
 
 ;; Autocomplete finder
 (add-hook 'ido-setup-hook
@@ -85,23 +89,30 @@
 
 (setq ido-use-filename-at-point nil)
 
-;; modes
+;; Modes
 
 (winner-mode)
 
 ;; Key Bindings
+
 (global-set-key [f1] 'neotree-dir)
 (global-set-key [f2] 'cider-jack-in)
 (global-set-key [f3] 'cider-switch-to-repl-buffer)
 
 ;; Clojure Standards
+
 (require 'whitespace)
 (add-hook 'clojure-mode-hook (lambda () (whitespace-mode t)))
 (add-hook 'clojurescript-mode-hook (lambda () (whitespace-mode t)))
 (setq whitespace-style '(face lines-tail trailing))
 (setq whitespace-line-column 84)
 
-;; NEW STUFF ;;
+;; Clean backup files
+
+(setq backup-directory-alist
+     `(("." . ,(expand-file-name "~/emacs.d/backups"))))
+(setq auto-save-file-name-transforms
+     `((".*" ,(expand-file-name "~/emacs.d/backups") t)))
 
 (fset 'gui-diff-last-failure
       (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([18 97 99 116 117 97 108 58 13 134217734 19 40 61 13 right 201326624 201326624 134217847 134217790 40 103 117 105 45 100 105 102 102 32 25 41] 0 "%d")) arg)))
@@ -112,10 +123,10 @@
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 ;; (if (fboundp 'fringe-mode) (fringe-mode 0))
 
-;; No splash screen please ... jeez
+;; No splash screen
 (setq inhibit-startup-message t)
 
-;; enable y/n answers
+;; Enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (defadvice yes-or-no-p (around prevent-dialog activate)
@@ -127,6 +138,8 @@
   "Prevent y-or-n-p from activating a dialog"
   (let ((use-dialog-box nil))
     ad-do-it))
+
+;; WINDOWS ADJUSTMENT
 
 (global-set-key (kbd "S-C-<left>")  'shrink-window-horizontally)
 (global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
@@ -140,7 +153,7 @@
 (global-set-key (kbd "C-x g") 'webjump)
 (global-set-key (kbd "C-x f") 'sudo-find-file)
 
-;; refresh files
+;; REFRESH FILES
 
 (global-auto-revert-mode t)
 
@@ -151,13 +164,33 @@
 (global-set-key (kbd "<S-left>")  'windmove-left)
 (global-set-key (kbd "<S-right>") 'windmove-right)
 
-;; Magit
+;; MAGIT
 
 (setq magit-highlight-whitespace nil)
 
 (global-set-key (kbd "C-c g") 'magit-status)
 
 (global-linum-mode)
+
+;; Indentation
+
+(define-clojure-indent
+ (component 'defun)
+ (div 'defun)
+ (span 'defun)
+ (form 'defun)
+ (a 'defun)
+ (ul 'defun)
+ (li 'defun)
+ (input 'defun)
+ (h1 'defun)
+ (h2 'defun)
+ (h3 'defun)
+ (h4 'defun)
+ (h5 'defun)
+ (h6 'defun)
+ (button 'defun)
+ (textarea 'defun))
 
 ;; Custom functions
 
@@ -176,3 +209,7 @@ Including indent-buffer, which should not be called automatically on save."
   (interactive)
   (cleanup-buffer-safe)
   (indent-region (point-min) (point-max)))
+
+;; Load
+
+(load "~/.emacs.d/scss-mode.el")
