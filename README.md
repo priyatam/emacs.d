@@ -1,32 +1,41 @@
 # Cider Light
 
-A lightweight Emacs Cider configuration, with a gentle introduction to Emacs [Cider](https://github.com/clojure-emacs/cider).
+A lightweight Emacs Cider configuration, with a gentle introduction to Emacs Cider[Cider](https://github.com/clojure-emacs/cider).
 
 ## Installation
 
 This guide is optimized for OSX.
 
-Brew lovers can install the latest version of Emacs and symlink Emacs.app to `~/Applications`:
+Install the latest version of Emacs and symlink Emacs.app to `~/Applications`:
 
 	brew install emacs --cocoa --srgb
 	brew linkapps Emacs
 
 For detailed instructions, see CIDER's [README](https://github.com/clojure-emacs/cider/blob/master/README.md).
 
-**Marmalade** is the package manager, built on top of package.el (an older package manager, pre emacs-23). It uses `MELPA`, a standard repo (package archives) for emacs lisp packages.
+**Marmalade** is the package manager built on top of package.el (an older package manager pre emacs-23). It uses `MELPA`, a standard repo (package archives) for emacs lisp packages.
 
-Add this as a package archive source in ~/.emacs.d/init.el:
+First, create a file under ~/.emacs.d/init.el.
+
+Next, add this as a package archive source in:
 
 ```elisp
 (require 'package)
 (add-to-list 'package-archives
-    '("marmalade" . "http://marmalade-repo.org/	packages/") t)
-  (package-initialize)
+	     '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives
+	     '("tromey" . "http://tromey.com/elpa/") t)
+(add-to-list 'package-archives
+	     '("melpa" . "http://melpa.milkbox.net/packages/"))
+
+(package-initialize)
 ```
 	  
 ## Introduction
 
-Emacs is one of the world's oldest and most powerful editors. However, due to its poor user-interface, and [cryptic](http://www.emacswiki.org) docs, developers new to Clojure choose Sublime, Lighttable, or [Cursive](https://cursiveclojure.com). In this guide I will document my struggles to learn Emacs and port my workflow from Lightable to Cider. 
+Emacs is one of the world's oldest and most powerful editors. 
+
+However, due to its poor user-interface, and [cryptic](http://www.emacswiki.org) docs, developers new to Clojure choose Sublime, Lighttable, or [Cursive](https://cursiveclojure.com). In this guide I will document my struggles to learn Emacs and port my workflow from Lightable to Cider. 
 
 ◊
 
@@ -35,16 +44,16 @@ In order to do anything in Emacs, you must first understand these two acronyms.
 	M-x (Meta x) is Opt x
 	C-x is Ctrl x
 
-Now open Emacs app.
+Open Emacs app.
 
-Typing `M-x` opens a command palette above the status bar. This is where you run custom commands from changing font to installing packages, from running your custom lisp code and keyboard shortcuts.
+Typing `M-x` opens a command palette above the status bar. This is where you run custom commands from changing font to installing packages, from running your custom lisp code and keyboard shortcuts and many, many more.
 
 Let's try to install a package. 
 
 First, set the paths from shell (or else Emacs OS X won’t understand):
 
 	M-x packge-install
-	_hit RETURN_
+	_RETURN_
 	exec-path-from-shell
 
 Then add this in your init.el.
@@ -66,20 +75,19 @@ Optionally, change themes:
 	M-x package-install
 	solarized
 	
-Optionally, add a file browser:	
+Add a file browser:	
 
 	M-x package-install
 	neotree		
 	
-For additional configuration, copy and paste [init.el](/init.el)  from this directory into your local `~/.emacs.d`. You can override your init.el. Don't worry about what's inside—you're going to learn about writing your own later.  	  
-
+For additional configuration, copy and paste [init.el](/init.el)  from this directory into your local `~/.emacs.d`. You can override your init.el. Don't worry about what's inside—you're going to learn about writing your own customizations later. 	 
 ## Concepts
 
 **Buffers**
 
-You don't have windows in emacs. Everything is a *buffer*. They get added on top of each other. 
+You don't have windows in emacs. Everything is a *buffer*. They get added on top of each other. Buffers have regions and they store text. All operations (functions) access text and code on buffers. 
 
-You can find current buffers from the 'buffers' menu.
+Every buffer possesses ONE major mode that determines the behavior of editing in that buffer. A row at the bottom of the buffer called the mode line indicates the major mode. Minor modes are optional, and there can be anywhere from 0 to a lot active at one time in a given buffer.
 
 **nRepl**
 
@@ -89,15 +97,15 @@ An nrepl client, configured to the localhost and port, opens up. Now you're good
 
 **Commands**
 
-With Emacs on Mac OS X, you don't have to learn all the shortcuts right away, since the toolbar provides some hints. Feel free to use the mouse. 
+Commands are dispatched from the user to the buffer. Based on what
+
+With Emacs on Mac OS X, you don't have to learn all the shortcuts right away. Feel free to use the mouse. 
 
 ## Commands 
 
-### Basics
+### Moving around
 
-Do you want to learn how to open a file, move around the editor (with a mouse or keyboard), find and install plugins, run commands, split windows, change themes/fonts etc., and evaluate clojure code _out of the box_?
-
-Me too.
+Create/Switch buffers:	
 
 	C-x 0 close current window 
 	C-x 1 close all but current
@@ -111,106 +119,176 @@ Kill current buffer by name
 Move across buffers: 
 
 	C-x-o
+	
+Previous/Next Buffer states:
 
-Increase font size:
+    C-c ->
+    C-c <-	        
+    	
+Quit command mode
 
-	C-x + (hold and repeat)
+    C-g	    
 
-Decrease font size
+Quit Emacs
 
-	C-x - (hold and repeat)
+	C-x C-c
 
+### Files
+	
+Open a browser:
+
+	Fn-F1	
+	
 Open a file:
 
 	C-x C-f
 
 Save file: 
 
+	C-x C-e
 	Cmd-X
 	
-Fullscreen
+Goto line
+    
+    M-g-g  	  
+    
+Goto start/end of line
 
-	M-x toggle-frame-fullscreen	
+    C-A
+    C-K
+    C-E  
 
-Quit Emacs
+Goto start/end of page
 
-	C-x C-c
-	
-If you've got this far, you're now able to move around.
+    S-M-<
+    S-M->
 
-### Eval/Repl
+Find forward/backward  
+    
+    C-s
+    C-r
+    
+Replace
 
-Open a browser:
+    M-x replace-string
+                
+Format code
 
-	Fn-F1
-	
-Enter the path of the folder to open
+    C-c-n             
 
-	~/Dev/github/user/clojureapp	
-
-I prefer splitting my screen like this (C-x 3, C-x 2):
-	
-![](/img/cider-three-pane.png)	
+### Eval
 
 Start Cider:
 
-	Fn-F2
+    M-x cider-connect
 
 Start a dedicated repl:
 
-	Fn-F3
-
-Evaluate current file
-
-	C-c C-k
+    Fn-F3
 
 Evaluate form and show value in status bar:
 
-	C-c z
+    C-c C-e
 	
-Evaluate form and show value in buffer:
+Evaluate current file
 
-	C-x x
+    C-c C-k	
+    
+Jumpt into symbol
+
+    M-.
+    M-,
+    
+Move to next sexpr
+
+    C-M-f
+    
+Move to last sexpr
+
+    C-M-b                   	
 	
+### Git
+	
+Maggit status
+
+    C-c g        
+
+Inspect files
+
+    move up/down and tab into filename to see changes
+    
+Stash/Unstash
+
+    s/u
+    
+Commit
+
+    c c
+    
+Push
+
+    Shft P Shft P           
+    
+
+### Editing
+
+Add Comment
+
+    Go the beginning of line and,
+    M-;
+    
+### Paredit
+
+
+Slurp - Grab the thing on the right
+
+    C-->    
+
+Unslurp - Push it right outsde your parens
+
+    C-<-
+                
+Wrap parens: place cursor before   
+   
+    M-(
+   
+    
+### Misc
+
+Open a shell:
+
+   M-x eshell
+
+Fullscreen
+
+	M-x toggle-frame-fullscreen	
+    
+Increase font size:
+
+	C-x + (hold and repeat)
+
+Decrease font size
+
+	C-x - (hold and repeat)                
+    	
 ## Packages
 
 List available packages:
 
 	M-x package-list-packages
 
-To manually install a package, move the point to line number of the package and press 'i' for 'install'. 
-
-After selection, press 'x' (eXecute) to install.
-
-If you know what you want, you can also type Cmd-f to find the package by _first_ characters.
+To manually install a package, move the point to line number of the package and press 'i' for 'install'. After selection, press 'x' (eXecute) to install. If you know what you want, you can also type Cmd-f to find the package by _first_ characters.
 
 _Note to self_: there are tons of packages for Emacs. Don't waste your time on them right now. You're going to find your way eventually. The default cider IDE comes pre-loaded with most of what you require anyway. You get things like inline docs, paredit, and much more.
 
 Recommended Packages:
 
 - auto-complete
-- paredit
-- rainbow-delimeters
-- git-gutter
+- magit
 - [neotree](http://www.emacswiki.org/emacs/NeoTree)
-
-## Keybindings
-
-There are two kinds of bindings: global and local.
-
-For instance, my config looks like this:
-
-	;; Key Bindings
-	(global-set-key [f1] 'neotree-dir)
-	(global-set-key [f2] 'cider-jack-in)
-	(global-set-key [f3] 'cider-switch-to-repl-buffer)
-	(global-set-key [f6] 'paredit-mode)
-
-	(require 'bind-key)
-	(bind-key "C-x z" 'cider-eval-last-sexp)
-	(bind-key "C-x x" 'cider-pprint-eval-defun-at-point)
-
-As you can see I set f1, f2, f3 to keybindings to the actual commands in Cider's [source](https://github.com/clojure-emacs/cider/blob/master/cider-mode.el), which are just symbols that execute a body of code. You're free to change these, and add personal bindings to 50+ cider commands. 
+- paredit
+- projectile 
+- rainbow-delimeters
 
 ## References
 
