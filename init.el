@@ -29,7 +29,7 @@
 (set-default-font "Source Code Pro 18")
 
 ;; STARTUP
-(setq default-directory "~/github/quintype")
+;; (setq default-directory "~/github/")
 
 (toggle-frame-fullscreen)
 
