@@ -1,5 +1,8 @@
+bookmarks
 auto-save-list
 backups
+eshell*
+ido*
 *~
 .places
 session.*
@@ -9,6 +12,7 @@ games
 swank
 emms
 *.elc
+recentf
 .DS_Store
 .cask
 /var/
