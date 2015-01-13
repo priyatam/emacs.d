@@ -13,7 +13,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-;; PATH
+;; STARTUP
 
 (defun set-exec-path-from-shell-PATH ()
   (interactive)
@@ -26,19 +26,19 @@
 
 ;; (setq default-directory "~/github/")
 
-;; FONTS ;;
+;; FONTS
 
 (set-default-font "Source Code Pro 18")
 (setq-default line-spacing 4)
 
 ;; GUI
 
-;; No splash screen
+;; no splash screen
 (setq inhibit-startup-message t)
 
 (toggle-frame-fullscreen)
 
-;; Turn off mouse interface early in startup to avoid momentary display
+;; turn off mouse interface early in startup to avoid momentary display
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -64,12 +64,51 @@
 
 (setq ring-bell-function 'ignore)
 
+;; FILES
+
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+
+;; ido
+(global-set-key (kbd "C-x f") 'find-file-in-project)
+
+;; dired
+(global-set-key (kbd "C-x C-j") 'dired-jump)
+(define-key ctl-x-4-map (kbd "C-j") 'dired-jump-other-window)
+
+;; refresh files
+(global-auto-revert-mode t)
+
+;; clean backup files
+(setq backup-directory-alist
+     `(("." . ,(expand-file-name "~/emacs.d/backups"))))
+(setq auto-save-file-name-transforms
+     `((".*" ,(expand-file-name "~/emacs.d/backups") t)))
+
+(fset 'gui-diff-last-failure
+      (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([18 97 99 116 117 97 108 58 13 134217734 19 40 61 13 right 201326624 201326624 134217847 134217790 40 103 117 105 45 100 105 102 102 32 25 41] 0 "%d")) arg)))
+
+;; enable y/n answers
+(fset 'yes-or-no-p 'y-or-n-p)
+
+(defadvice yes-or-no-p (around prevent-dialog activate)
+  "Prevent yes-or-no-p from activating a dialog"
+  (let ((use-dialog-box nil))
+    ad-do-it))
+
+(defadvice y-or-n-p (around prevent-dialog-yorn activate)
+  "Prevent y-or-n-p from activating a dialog"
+  (let ((use-dialog-box nil))
+    ad-do-it))
+
 ;; NAVIGATION
 
-;; File Browser
+;; file browser (if you really need one)
 (load "~/.emacs.d/elpa/neotree-0.2.1/neotree.el")
 
-;; Autocomplete finder
+;; autocomplete finder
 (add-hook 'ido-setup-hook
 	  (lambda ()
 	    ;; avoiding need to use arrow keys!
@@ -93,8 +132,6 @@
 
 (require 'cider-mode)
 
-;; (global-company-mode)
-
 (setq cider-repl-pop-to-buffer-on-connect nil)
 (setq cider-repl-pop-to-buffer-on-connect nil)
 (setq cider-show-error-buffer 'except-in-repl)
@@ -107,11 +144,13 @@
 (add-hook 'clojure-mode-hook 'paredit-mode)
 (show-paren-mode 1)
 
-;; Popup contextual documentation
+;; popup contextual documentation
 (eval-after-load "cider"
   '(define-key cider-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc))
 
-;; Clojure Standards
+(global-company-mode)
+
+;; clojure standards
 
 (require 'whitespace)
 (add-hook 'clojure-mode-hook (lambda () (whitespace-mode t)))
@@ -138,33 +177,6 @@
  (textarea 'defun))
 
 (setq-default fill-column 80)
-
-;; FILES
-
-;; Refresh files
-(global-auto-revert-mode t)
-
-;; Clean backup files
-(setq backup-directory-alist
-     `(("." . ,(expand-file-name "~/emacs.d/backups"))))
-(setq auto-save-file-name-transforms
-     `((".*" ,(expand-file-name "~/emacs.d/backups") t)))
-
-(fset 'gui-diff-last-failure
-      (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([18 97 99 116 117 97 108 58 13 134217734 19 40 61 13 right 201326624 201326624 134217847 134217790 40 103 117 105 45 100 105 102 102 32 25 41] 0 "%d")) arg)))
-
-;; Enable y/n answers
-(fset 'yes-or-no-p 'y-or-n-p)
-
-(defadvice yes-or-no-p (around prevent-dialog activate)
-  "Prevent yes-or-no-p from activating a dialog"
-  (let ((use-dialog-box nil))
-    ad-do-it))
-
-(defadvice y-or-n-p (around prevent-dialog-yorn activate)
-  "Prevent y-or-n-p from activating a dialog"
-  (let ((use-dialog-box nil))
-    ad-do-it))
 
 ;; CSS3/SCSS
 
