@@ -132,25 +132,26 @@
 
 (require 'cider-mode)
 
+(global-company-mode)
+
 (setq cider-repl-pop-to-buffer-on-connect nil)
 (setq cider-repl-pop-to-buffer-on-connect nil)
 (setq cider-show-error-buffer 'except-in-repl)
 (setq cider-stacktrace-default-filters '(java repl tooling dup))
 (setq cider-repl-display-in-current-window t)
 
-;; (add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'clojure-mode-hook 'paredit-mode)
+(add-hook 'cider-mode-hook #'eldoc-mode)
+
 (show-paren-mode 1)
 
-;; popup contextual documentation
+;; popup contextual docs
 (eval-after-load "cider"
   '(define-key cider-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc))
 
-(global-company-mode)
-
-;; clojure standards
+;; CLOJURE CODE STANDARDS
 
 (require 'whitespace)
 (add-hook 'clojure-mode-hook (lambda () (whitespace-mode t)))
@@ -182,6 +183,16 @@
 
 (load "~/.emacs.d/scss-mode.el")
 (setq css-indent-offset 4)
+
+;; HTML/Templates
+
+(require 'web-mode)
+
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+
+(setq web-mode-markup-indent-offset 2)
+(setq web-mode-css-indent-offset 2)
 
 ;; KEY BINDINGS
 
