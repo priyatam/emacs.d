@@ -132,7 +132,7 @@
 
 (require 'cider-mode)
 
-(global-company-mode)
+;; (global-company-mode)
 
 (setq cider-repl-pop-to-buffer-on-connect nil)
 (setq cider-repl-pop-to-buffer-on-connect nil)
@@ -193,6 +193,12 @@
 
 (setq web-mode-markup-indent-offset 2)
 (setq web-mode-css-indent-offset 2)
+
+;; Coffeescript
+
+(require 'coffee-mode)
+
+(add-to-list 'auto-mode-alist '("\\.coffee\\'" . coffee-mode))
 
 ;; KEY BINDINGS
 

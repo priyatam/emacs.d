@@ -1,10 +1,8 @@
-# Cider Light
+# Emacs Light
 
-A lightweight Emacs Cider configuration, with a gentle introduction to Emacs [Cider](https://github.com/clojure-emacs/cider).
+A gentle introduction to Emacs [Cider](https://github.com/clojure-emacs/cider), optimized for OSX and web development in Clojure, Clojurescript, Javascript, Sass, and HTML5.
 
 ## Installation
-
-This guide is optimized for OSX.
 
 Install the latest version of Emacs and symlink Emacs.app to `~/Applications`:
 
@@ -31,9 +29,7 @@ Next, add this as a package archive source in:
 	  
 ## Introduction
 
-Emacs is one of the world's oldest and most powerful editors. 
-
-However, due to its poor user-interface, and [cryptic](http://www.emacswiki.org) docs, developers new to Clojure choose Lighttable or [Cursive](https://cursiveclojure.com). In this guide I will document my struggles to learn Emacs and port my workflow from Lightable to Cider. 
+Emacs is one of the world's oldest and most powerful editors. However, due to its poor user-interface, and [cryptic](http://www.emacswiki.org) docs, developers new to Clojure choose Lighttable or [Cursive](https://cursiveclojure.com). In this guide I will document my struggles to learn Emacs and port my workflow from Lightable to Cider. 
 
 ◊
 
@@ -68,28 +64,29 @@ List available packages:
 	M-x package-list-packages
 
 To manually install a package, move the point to line number of the package and press 'i' for 'install'. After selection, press 'x' (eXecute) to install. If you know what you want, you can also type C-f to find the package by _first_ characters.
-
-	M-x package-install
-	cider
 	
 Install additional packages:
 
 	M-x package-install
-	> auto-complete
+    >  cider
+    > auto-complete
 	> git-gutter
 	> magit
 	> paredit
 	> projectile 
 	> rainbow-delimeters
+	> js2-mode
 
-After successfullt downloaing downloading the required packages from Marmalade, Eamcs will display `done` in the status bar.
+After successfully downloaing downloading the required packages from Marmalade, Eamcs will display `done` in the status bar.
+
+Add [scss mode](https://github.com/antonj/scss-mode) manually by copying its [file](https://github.com/antonj/scss-mode/blob/master/scss-mode.el) into your .emacs.d:
 
 Optionally, add a theme:
 
 	M-x package-install
 	solarized
 		
-For configuraing Emacs, copy and paste [init.el](/init.el) from this directory into your local `~/.emacs.d`. You can override your init.el. Don't worry about what's inside—you're going to learn about writing your own customizations later. 	 
+For configuraing Emacs further, copy and paste [init.el](/init.el) from this directory into your local `~/.emacs.d`. You can override your init.el. Don't worry about what's inside—you're going to learn about writing your own customizations later. 	 
 
 ## Concepts 
 
@@ -107,9 +104,11 @@ An nrepl client, configured to the localhost and port, opens up. Now you're good
 
 **Commands**
 
-Commands are dispatched from the user to the buffer. Based on what
+Commands are dispatched from the user to the buffer.
 
-With Emacs on Mac OS X, you don't have to learn all the shortcuts right away. Feel free to use the mouse. 
+**Modes**
+
+Two modes: Major and Minor. You can think of Major mode as a language-specific mode. Only one major mode is allowed at any point in time. Serveral Minor modes, on the other hand, can be active in a single Major mode.
 
 ## Commands 
 
@@ -276,6 +275,7 @@ Mark
 
 Copy
 
+	C-c
 
 Cut
 
