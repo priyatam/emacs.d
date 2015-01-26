@@ -60,6 +60,10 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'zenburn t)
 
+(require 'color-theme)
+(color-theme-initialize)
+;;(color-theme-robin-hood)
+
 ;; SOUNDS
 
 (setq ring-bell-function 'ignore)
@@ -132,6 +136,9 @@
 
 (require 'cider-mode)
 
+(setq nrepl-log-messages t)
+(setq nrepl-hide-special-buffers t)
+
 ;; (global-company-mode)
 
 (setq cider-repl-pop-to-buffer-on-connect nil)
@@ -146,6 +153,8 @@
 (add-hook 'cider-mode-hook #'eldoc-mode)
 
 (show-paren-mode 1)
+
+(setq cider-switch-to-repl-command #'cider-switch-to-current-repl-buffer)
 
 ;; popup contextual docs
 (eval-after-load "cider"
@@ -193,6 +202,16 @@
 
 (setq web-mode-markup-indent-offset 2)
 (setq web-mode-css-indent-offset 2)
+
+;; Javascript
+
+(require 'js2-mode)
+
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+
+(add-hook 'js-mode-hook 'js2-minor-mode)
+(add-hook 'js2-mode-hook 'ac-js2-mode)
 
 ;; Coffeescript
 
