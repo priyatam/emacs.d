@@ -1,23 +1,38 @@
 ;; REPOSITORIES
 
 (require 'package)
-(add-to-list 'package-archives
-	     '("marmalade" . "http://marmalade-repo.org/packages/") t)
-(add-to-list 'package-archives
-	     '("tromey" . "http://tromey.com/elpa/") t)
-(add-to-list 'package-archives
-	     '("melpa" . "http://melpa.milkbox.net/packages/"))
+
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("tromey" . "http://tromey.com/elpa/") t)
 
 (package-initialize)
 
 (when (not package-archive-contents)
   (package-refresh-contents))
 
+(unless (package-installed-p 'cider)
+  (package-install 'cider))
+(unless (package-installed-p 'magit)
+  (package-install 'magit))
+(unless (package-installed-p 'whitespace)
+  (package-install 'whitespace))
+(unless (package-installed-p 'js2-mode)
+  (package-install 'js2-mode))
+(unless (package-installed-p 'web-mode)
+  (package-install 'web-mode))
+(unless (package-installed-p 'scss-mode)
+  (package-install 'scss-mode))
+(unless (package-installed-p 'neotree)
+  (package-install 'neotree))
+
 ;; STARTUP
 
 (defun set-exec-path-from-shell-PATH ()
   (interactive)
-  (let ((path-from-shell (replace-regexp-in-string "[ \t\n]*$" "" (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
+  (let ((path-from-shell
+	 (replace-regexp-in-string "[ \t\n]*$" ""
+				   (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
     (setenv "PATH" path-from-shell)
     (setq exec-path (split-string path-from-shell path-separator))))
 
@@ -62,7 +77,6 @@
 
 (require 'color-theme)
 (color-theme-initialize)
-;;(color-theme-robin-hood)
 
 ;; SOUNDS
 
@@ -109,9 +123,6 @@
 
 ;; NAVIGATION
 
-;; file browser (if you really need one)
-(load "~/.emacs.d/elpa/neotree-0.2.1/neotree.el")
-
 ;; autocomplete finder
 (add-hook 'ido-setup-hook
 	  (lambda ()
@@ -132,20 +143,21 @@
 
 (global-set-key (kbd "C-c g") 'magit-status)
 
-;; CIDER ;;
+;; CIDER
 
 (require 'cider-mode)
 
+;;(global-company-mode)
+
 (setq nrepl-log-messages t)
 (setq nrepl-hide-special-buffers t)
-
-;; (global-company-mode)
 
 (setq cider-repl-pop-to-buffer-on-connect nil)
 (setq cider-repl-pop-to-buffer-on-connect nil)
 (setq cider-show-error-buffer 'except-in-repl)
 (setq cider-stacktrace-default-filters '(java repl tooling dup))
 (setq cider-repl-display-in-current-window t)
+(setq cider-switch-to-repl-command #'cider-switch-to-current-repl-buffer)
 
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
@@ -154,15 +166,14 @@
 
 (show-paren-mode 1)
 
-(setq cider-switch-to-repl-command #'cider-switch-to-current-repl-buffer)
-
 ;; popup contextual docs
 (eval-after-load "cider"
   '(define-key cider-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc))
 
-;; CLOJURE CODE STANDARDS
+;; Clojure Coding Standards
 
 (require 'whitespace)
+
 (add-hook 'clojure-mode-hook (lambda () (whitespace-mode t)))
 (add-hook 'clojurescript-mode-hook (lambda () (whitespace-mode t)))
 (setq whitespace-style '(face lines-tail trailing))
@@ -190,8 +201,7 @@
 
 ;; CSS3/SCSS
 
-(load "~/.emacs.d/scss-mode.el")
-(setq css-indent-offset 4)
+(setq css-indent-offset 2)
 
 ;; HTML/Templates
 
@@ -215,9 +225,9 @@
 
 ;; Coffeescript
 
-(require 'coffee-mode)
+;;(require 'coffee-mode)
 
-(add-to-list 'auto-mode-alist '("\\.coffee\\'" . coffee-mode))
+;; (add-to-list 'auto-mode-alist '("\\.coffee\\'" . coffee-mode))
 
 ;; KEY BINDINGS
 
@@ -244,7 +254,7 @@
 
 ;; CUSTOM FUNCTIONS
 
-(defun foobar (msg)
+(defun hello-world (msg)
   (interactive "sMessage: ")
   (message msg))
 
