@@ -20,7 +20,7 @@
 (unless (package-installed-p 'company)
   (package-install 'company))
 (unless (package-installed-p 'projectile)
-  (package-install 'projectile)
+  (package-install 'projectile))
 (unless (package-installed-p 'magit)
   (package-install 'magit))
 (unless (package-installed-p 'whitespace)
