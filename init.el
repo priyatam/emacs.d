@@ -13,6 +13,14 @@
 
 (unless (package-installed-p 'cider)
   (package-install 'cider))
+(unless (package-installed-p 'paredit)
+  (package-install 'paredit))
+(unless (package-installed-p 'rainbow-delimiters)
+  (package-install 'rainbow-delimiters))
+(unless (package-installed-p 'company)
+  (package-install 'company))
+(unless (package-installed-p 'projectile)
+  (package-install 'projectile)
 (unless (package-installed-p 'magit)
   (package-install 'magit))
 (unless (package-installed-p 'whitespace)
@@ -23,6 +31,8 @@
   (package-install 'web-mode))
 (unless (package-installed-p 'scss-mode)
   (package-install 'scss-mode))
+(unless (package-installed-p 'markdown-mode)
+  (package-install 'markdown-mode))
 (unless (package-installed-p 'neotree)
   (package-install 'neotree))
 
@@ -147,7 +157,10 @@
 
 (require 'cider-mode)
 
-;;(global-company-mode)
+(global-company-mode)
+
+(add-hook 'after-init-hook 'global-company-mode)
+
 
 (setq nrepl-log-messages t)
 (setq nrepl-hide-special-buffers t)
@@ -158,6 +171,9 @@
 (setq cider-stacktrace-default-filters '(java repl tooling dup))
 (setq cider-repl-display-in-current-window t)
 (setq cider-switch-to-repl-command #'cider-switch-to-current-repl-buffer)
+
+;; switch current buffer into repl
+(setq cider-repl-display-in-current-window t)
 
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
@@ -199,20 +215,6 @@
 
 (setq-default fill-column 80)
 
-;; CSS3/SCSS
-
-(setq css-indent-offset 2)
-
-;; HTML/Templates
-
-(require 'web-mode)
-
-(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-
-(setq web-mode-markup-indent-offset 2)
-(setq web-mode-css-indent-offset 2)
-
 ;; Javascript
 
 (require 'js2-mode)
@@ -228,6 +230,26 @@
 ;;(require 'coffee-mode)
 
 ;; (add-to-list 'auto-mode-alist '("\\.coffee\\'" . coffee-mode))
+
+;; CSS3/SCSS
+
+(setq css-indent-offset 2)
+
+;; HTML/Templates
+
+(require 'web-mode)
+
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+
+(setq web-mode-markup-indent-offset 2)
+(setq web-mode-css-indent-offset 2)
+
+;; Markdown
+(require 'markdown-mode)
+
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
 
 ;; KEY BINDINGS
 

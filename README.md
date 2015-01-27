@@ -64,32 +64,31 @@ List available packages:
 
      M-x package-list-packages
 
-To manually install a package, move the point to line number of the package and press 'i' for 'install'.
-After selection, press 'x' (eXecute) to install. If you know what you want, you can also type C-f to
-find the package by _first_ characters.
-
-For deleting packages, type 'd' followed by 'x'
+To install a package, move the pointer to the line number of the package and press 'i' to select.
+Press 'x' (eXecute) to install. If you know what you want, you can also type C-s to
+find the package by _first_ characters. For deleting packages, type 'd' followed by 'x'
 	
-Install package:
+Or you can install package directly from the mini buffer:
 
     M-x package-install
     RET
     cider
 
-After successfully downloading a required packag Emacs will display `done` in the status bar.
+After successfully downloading a required package Emacs will display `done` in the status bar.
 
-This repo's init.el config comes pre-installed with the following packages:
+This repo's `init.el` config comes pre-installed with the following core packages:
 
-     cider
-     magit
-     js2-mode
-     web-mode
-     scss-mode
-     projectile
-     git-gutter
-     auto-complete
-     rainbow-delimeters
-     ac-js2
+	cider
+	paredit
+	company
+    rainbow-delimeters
+	magit
+    js2-mode
+    web-mode
+    scss-mode
+	markdown-mode
+    projectile
+    git-gutter
     
 Optionally, add support for themes by installing
 [color-theme](http://download.savannah.gnu.org/releases/color-theme/color-theme-6.6.0.zip)
@@ -108,13 +107,9 @@ Every buffer possesses ONE major mode that determines the behavior of editing in
 the bottom of the buffer called the mode line indicates the major mode. Minor modes are optional, and
 there can be anywhere from 0 to a lot active at one time in a given buffer.
 
-**nRepl**
+**Mini Buffer**
 
-Most Clojure IDEs use a [network REPL](https://github.com/clojure/tools.nrepl) to connect to clojure
-projects. This ensures seamless interaction with local devs and remote devs. With Cider, you can simply
-open any .clj file from an existing leiningen project and run `M-x cider-jack-in`.
-
-An nrepl client, configured to the localhost and port, opens up. Now you're good to code.
+The command line on the bottom of Emacs. This is where you type your Emacs commands.
 
 **Commands**
 
@@ -125,6 +120,14 @@ Commands are dispatched from the user to the buffer.
 Two modes: Major and Minor. You can think of Major mode as a language-specific mode. Only one major mode
 is allowed at any point in time. Serveral Minor modes, on the other hand, can be active in a single Major
 mode.
+
+**nRepl**
+
+Most Clojure IDEs use a [network REPL](https://github.com/clojure/tools.nrepl) to connect to clojure
+projects. This ensures seamless interaction with local devs and remote devs. With Cider, you can simply
+open any .clj file from an existing leiningen project and run `M-x cider-jack-in`.
+
+An nrepl client, configured to the localhost and port, opens up. Now you're good to code.
 
 ## Commands 
 
