@@ -27,14 +27,14 @@
   (package-install 'whitespace))
 (unless (package-installed-p 'js2-mode)
   (package-install 'js2-mode))
-(unless (package-installed-p 'web-mode)
-  (package-install 'web-mode))
 (unless (package-installed-p 'scss-mode)
   (package-install 'scss-mode))
 (unless (package-installed-p 'markdown-mode)
   (package-install 'markdown-mode))
 (unless (package-installed-p 'neotree)
   (package-install 'neotree))
+;(unless (package-installed-p 'flycheck-clojure)
+;  (package-install 'flycheck-clojure))
 
 ;; STARTUP
 
@@ -215,6 +215,16 @@
 
 (setq-default fill-column 80)
 
+;; Static Code Analyzer
+
+;;(eval-after-load 'flycheck '(flycheck-clojure-setup))
+;;(add-hook 'after-init-hook #'global-flycheck-mode)
+
+;; Hoplon
+
+(add-to-list 'auto-mode-alist '("\\.cljs\\.hl\\'" . clojure-mode))
+(add-to-list 'auto-mode-alist '("\\.boot\'" . clojure-mode))
+
 ;; Javascript
 
 (require 'js2-mode)
@@ -222,8 +232,9 @@
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 
-(add-hook 'js-mode-hook 'js2-minor-mode)
-(add-hook 'js2-mode-hook 'ac-js2-mode)
+(setq js-indent-level 2)
+
+;; (add-hook 'js-mode-hook 'js2-minor-mode)
 
 ;; Coffeescript
 
@@ -295,3 +306,16 @@ Including indent-buffer, which should not be called automatically on save."
   (interactive)
   (cleanup-buffer-safe)
   (indent-region (point-min) (point-max)))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(js2-missing-semi-one-line-override t)
+ '(js2-strict-missing-semi-warning nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
