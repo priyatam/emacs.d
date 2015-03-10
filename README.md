@@ -1,7 +1,7 @@
 # Cider Light
 
-A gentle introduction to Emacs using [Cider](https://github.com/clojure-emacs/cider), optimized for web development
-in Clojure, Clojurescript, Javascript, Sass, and HTML5.
+A gentle introduction to Emacs using [Cider](https://github.com/clojure-emacs/cider), optimized for
+web development in Clojure, Clojurescript, Javascript, HTML5, and CSS3.
 
 ## Installation
 
@@ -27,7 +27,7 @@ Next, add this as a package archive source in:
 	  
 ## Introduction
 
-Emacs is one of the world's oldest and most powerful editors. However, due to its poor user-interface,
+Emacs is one of the world's oldest and most powerful editors. However, due to its poor user-interface
 and [cryptic](http://www.emacswiki.org) docs, developers new to Lisp choose Lighttable, Sublime, or
 [Cursive](https://cursiveclojure.com). In this guide I will document my struggles to learn Emacs
 and port my workflow from Lightable to Cider. 
@@ -100,7 +100,7 @@ Without further ado, copy and paste [init.el](/init.el) from this directory into
 
 **Buffers**
 
-You don't have windows in emacs. Everything is a *buffer*. They stack on top of each other. Buffers have
+You don't have windows in emacs. Everything is a *buffer* and they stack on top of each other. Buffers have
 regions and they store text. All operations (functions) access text and code on buffers.
 
 Every buffer possesses ONE major mode that determines the behavior of editing in that buffer. A row at
@@ -129,7 +129,7 @@ open any .clj file from an existing leiningen project and run `M-x cider-jack-in
 
 An nrepl client, configured to the localhost and port, opens up. Now you're good to code.
 
-## Commands 
+## Cheatsheet
 
 ### Moving around
 
@@ -185,7 +185,7 @@ Center screen with cursor position
 	
 Open a browser:
 
-     	
+	neotree
 	
 Open a file:
 
