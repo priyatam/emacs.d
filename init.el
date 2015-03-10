@@ -1,4 +1,4 @@
-;; REPOSITORIES
+;; Package Summary:
 
 (require 'package)
 
@@ -10,6 +10,12 @@
 
 (when (not package-archive-contents)
   (package-refresh-contents))
+
+;; (defvar tmtxt/packages
+;;   '(package1 package2 package3 package4 package5))
+;; (dolist (p tmtxt/packages)
+;;   (when (not (package-installed-p p))
+;;     (package-install p)))
 
 (unless (package-installed-p 'cider)
   (package-install 'cider))
@@ -75,7 +81,7 @@
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 
-(setq default-cursor-type 'bar)
+(setq cursor-type 'bar)
 (set-cursor-color "#ffffff") 
 
 (global-linum-mode)
@@ -166,7 +172,6 @@
 (setq nrepl-hide-special-buffers t)
 
 (setq cider-repl-pop-to-buffer-on-connect nil)
-(setq cider-repl-pop-to-buffer-on-connect nil)
 (setq cider-show-error-buffer 'except-in-repl)
 (setq cider-stacktrace-default-filters '(java repl tooling dup))
 (setq cider-repl-display-in-current-window t)
@@ -217,8 +222,12 @@
 
 ;; Static Code Analyzer
 
-;;(eval-after-load 'flycheck '(flycheck-clojure-setup))
-;;(add-hook 'after-init-hook #'global-flycheck-mode)
+(eval-after-load 'flycheck '(flycheck-clojure-setup))
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
+;; Flycheck
+
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; Hoplon
 
@@ -228,18 +237,31 @@
 ;; Javascript
 
 (require 'js2-mode)
+(require 'jsx-mode)
+(require 'flycheck)
 
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . jsx-mode))
 
 (setq js-indent-level 2)
+(setq js2-highlight-level 3)
 
-;; (add-hook 'js-mode-hook 'js2-minor-mode)
+(add-hook 'js-mode-hook 'js2-minor-mode)
+(add-hook 'js2-mode-hook 'ac-js2-mode)
+(add-hook 'js-mode-hook
+          (lambda () (flycheck-mode t)))
+
+;; setup paredit for js
+(require 'js)
+(define-key js-mode-map "{" 'paredit-open-curly)
+(define-key js-mode-map "}" 'paredit-close-curly-and-newline)
+(require 'flycheck)
+(add-hook 'js-mode-hook
+          (lambda () (flycheck-mode t)))
 
 ;; Coffeescript
-
 ;;(require 'coffee-mode)
-
 ;; (add-to-list 'auto-mode-alist '("\\.coffee\\'" . coffee-mode))
 
 ;; CSS3/SCSS
@@ -260,7 +282,6 @@
 (require 'markdown-mode)
 
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-
 
 ;; KEY BINDINGS
 
@@ -306,6 +327,7 @@ Including indent-buffer, which should not be called automatically on save."
   (interactive)
   (cleanup-buffer-safe)
   (indent-region (point-min) (point-max)))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
