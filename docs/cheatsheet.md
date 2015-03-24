@@ -199,7 +199,7 @@ Wrap parens: place cursor before the symbol
 
 Open a shell:
 
-   M-x eshell
+	M-x eshell
 
 Fullscreen
 

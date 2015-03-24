@@ -4,8 +4,8 @@
 
 In order to move around in Emacs, you must first understand these two acronyms.
 
-   M-x (Meta x) is Opt x
-   C-x (Control x) is Ctrl x
+	M-x (Meta x) is Opt x
+	C-x (Control x) is Ctrl x
 
 Typing `M-x` opens a command palette above the status bar. This is where you run custom commands from
 changing font to installing packages, from running your custom lisp code and keyboard shortcuts
@@ -19,12 +19,13 @@ First, set the paths from shell (or else Emacs OS X won’t understand):
    <RET>
    exec-path-from-shell
 
-Then add this in your init.el.
+Then add this in your init.el.d
+
 
 ```elisp
 (when (memq window-system '(mac ns))
      (exec-path-from-shell-initialize))
-	 ```
+```
 	 
 **Buffers**
 
