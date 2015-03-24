@@ -220,3 +220,7 @@ Sometimes you want to customize js2-mode or web-mode, but have no about the vari
 	M-x customize-group [RET] <enter-mode> [RET]
 
 ## Emmet
+
+Expand any css-like [abbreviations](https://github.com/smihica/emmet-mode)
+
+	C-j
