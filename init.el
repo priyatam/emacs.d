@@ -1,5 +1,3 @@
-;; Package Summary:
-
 (require 'package)
 
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
@@ -35,20 +33,24 @@
   (package-install 'js2-mode))
 (unless (package-installed-p 'scss-mode)
   (package-install 'scss-mode))
+(unless (package-installed-p 'less-css-mode)
+  (package-install 'less-css-mode))
 (unless (package-installed-p 'markdown-mode)
   (package-install 'markdown-mode))
 (unless (package-installed-p 'neotree)
   (package-install 'neotree))
-;(unless (package-installed-p 'flycheck-clojure)
-;  (package-install 'flycheck-clojure))
+(unless (package-installed-p 'emmet-mode)
+  (package-install 'emmet-mode))
+;;(unless (package-installed-p 'flycheck-clojure)
+;;(package-install 'flycheck-clojure))
 
 ;; STARTUP
 
 (defun set-exec-path-from-shell-PATH ()
   (interactive)
   (let ((path-from-shell
-	 (replace-regexp-in-string "[ \t\n]*$" ""
-				   (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
+         (replace-regexp-in-string "[ \t\n]*$" ""
+                                   (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
     (setenv "PATH" path-from-shell)
     (setq exec-path (split-string path-from-shell path-separator))))
 
@@ -82,7 +84,7 @@
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 
 (setq cursor-type 'bar)
-(set-cursor-color "#ffffff") 
+(set-cursor-color "#ffffff")
 
 (global-linum-mode)
 
@@ -117,9 +119,9 @@
 
 ;; clean backup files
 (setq backup-directory-alist
-     `(("." . ,(expand-file-name "~/emacs.d/backups"))))
+      `(("." . ,(expand-file-name "~/emacs.d/backups"))))
 (setq auto-save-file-name-transforms
-     `((".*" ,(expand-file-name "~/emacs.d/backups") t)))
+      `((".*" ,(expand-file-name "~/emacs.d/backups") t)))
 
 (fset 'gui-diff-last-failure
       (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([18 97 99 116 117 97 108 58 13 134217734 19 40 61 13 right 201326624 201326624 134217847 134217790 40 103 117 105 45 100 105 102 102 32 25 41] 0 "%d")) arg)))
@@ -141,10 +143,10 @@
 
 ;; autocomplete finder
 (add-hook 'ido-setup-hook
-	  (lambda ()
-	    ;; avoiding need to use arrow keys!
-	    (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
-	    (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)))
+          (lambda ()
+            ;; avoiding need to use arrow keys!
+            (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+            (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)))
 
 (ido-mode 1)
 (setq ido-enable-flex-matching t)
@@ -166,7 +168,6 @@
 (global-company-mode)
 
 (add-hook 'after-init-hook 'global-company-mode)
-
 
 (setq nrepl-log-messages t)
 (setq nrepl-hide-special-buffers t)
@@ -201,22 +202,22 @@
 (setq whitespace-line-column 84)
 
 (define-clojure-indent
- (component 'defun)
- (div 'defun)
- (span 'defun)
- (form 'defun)
- (a 'defun)
- (ul 'defun)
- (li 'defun)
- (input 'defun)
- (h1 'defun)
- (h2 'defun)
- (h3 'defun)
- (h4 'defun)
- (h5 'defun)
- (h6 'defun)
- (button 'defun)
- (textarea 'defun))
+  (component 'defun)
+  (div 'defun)
+  (span 'defun)
+  (form 'defun)
+  (a 'defun)
+  (ul 'defun)
+  (li 'defun)
+  (input 'defun)
+  (h1 'defun)
+  (h2 'defun)
+  (h3 'defun)
+  (h4 'defun)
+  (h5 'defun)
+  (h6 'defun)
+  (button 'defun)
+  (textarea 'defun))
 
 (setq-default fill-column 80)
 
@@ -240,17 +241,9 @@
 (require 'jsx-mode)
 (require 'flycheck)
 
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.js" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . jsx-mode))
-
-(setq js-indent-level 2)
-(setq js2-highlight-level 3)
-
-(add-hook 'js-mode-hook 'js2-minor-mode)
-(add-hook 'js2-mode-hook 'ac-js2-mode)
-(add-hook 'js-mode-hook
-          (lambda () (flycheck-mode t)))
 
 ;; setup paredit for js
 (require 'js)
@@ -264,19 +257,27 @@
 ;;(require 'coffee-mode)
 ;; (add-to-list 'auto-mode-alist '("\\.coffee\\'" . coffee-mode))
 
-;; CSS3/SCSS
+;; CSS3/SCSS/Less
 
-(setq css-indent-offset 2)
+(require 'less-css-mode)
+(add-to-list 'auto-mode-alist '("\\.less\\'" . less-css-mode))
 
 ;; HTML/Templates
 
 (require 'web-mode)
 
+;;(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 
-(setq web-mode-markup-indent-offset 2)
-(setq web-mode-css-indent-offset 2)
+;; Emmet
+
+(require 'emmet-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode)
+(add-hook 'css-mode-hook  'emmet-mode)
+
+(add-hook 'emmet-mode-hook (lambda () (setq emmet-indentation 2)))
+(setq emmet-move-cursor-between-quotes t)
 
 ;; Markdown
 (require 'markdown-mode)
@@ -333,8 +334,17 @@ Including indent-buffer, which should not be called automatically on save."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(css-indent-offset 2)
+ '(js2-basic-offset 2)
+ '(js2-bounce-indent-p t)
  '(js2-missing-semi-one-line-override t)
- '(js2-strict-missing-semi-warning nil))
+ '(js2-strict-missing-semi-warning nil)
+ '(jsx-indent-level 2)
+ '(jsx-use-flymake t)
+ '(web-mode-attr-indent-offset 2)
+ '(web-mode-code-indent-offset 2)
+ '(web-mode-css-indent-offset 2)
+ '(web-mode-markup-indent-offset 2))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
