@@ -1,6 +1,6 @@
 ## Cheatsheet
 
-### Moving around
+### Buffers
 
 Create/Switch buffers:	
 
@@ -21,7 +21,43 @@ Previous/Next Buffer states:
 
     C-c ->
     C-c <-
-    	
+
+### Movement
+
+Move one Character forward/backward
+
+	C-f
+	C-b
+
+Move one Word forward/backward
+
+	M-f
+	M-b
+
+Move one Line forward/backword
+
+	C-n
+	C-p
+
+Move one Sentence forward/backword
+
+	M-e
+	M-a
+
+Move one page forward/backward
+
+	C-v
+	M-v
+	
+Center screen with cursor position
+
+	C-l
+
+End of buffer
+
+	M->
+	M-<
+	
 Set a bookmark
 
     C-x r m
@@ -37,22 +73,10 @@ Quit command mode
 Quit Emacs
 
     C-x C-c
-	
-Move forward one screen
-
-    C-v	
-	
-Move backward one screen
-	
-    M-v
-	
-Center screen with cursor position
-
-    C-l
 
 ### Files
 	
-Open a browser:
+Open a visual browser (not recommended):
 
 	neotree
 	
@@ -96,6 +120,59 @@ Format code
 Open a directory tree
 
     C-x-d
+    
+### Editing
+	
+Mark
+
+    C-<SPC>
+
+Copy
+
+    C-c
+
+Cut
+
+    C-w
+
+Paste
+
+    C-y
+    
+Undo
+
+    C-/
+    
+Remove extra space
+
+    M-<SPC>
+
+Add Comment
+
+    (Go the beginning of line)
+    M-;
+	
+### Git
+	
+Maggit status
+
+    C-c g
+
+Inspect files
+
+    move up/down and tab into filename to see changes
+    
+Stash/Unstash
+
+    s/u
+    
+Commit
+
+    c c
+    
+Push
+
+	<SHFT>-P Shft P
 
 ### Eval
 
@@ -128,59 +205,6 @@ Move to last sexpr
 
     C-M-b                   	
 	
-### Git
-	
-Maggit status
-
-    C-c g
-
-Inspect files
-
-    move up/down and tab into filename to see changes
-    
-Stash/Unstash
-
-    s/u
-    
-Commit
-
-    c c
-    
-Push
-
-    <SHFT>-P Shft P
-    
-### Editing
-
-Add Comment
-
-    Go the beginning of line and,
-    M-;
-    
-Mark
-
-    C-<SPC>
-
-Copy
-
-    C-c
-
-Cut
-
-    C-w
-
-Paste
-
-    C-y
-    
-Undo
-
-    C-/
-    
-Remove extra space
-
-    M-<SPC>
-   
 ### Paredit
 
 Slurp - Grab the thing on the right
@@ -201,6 +225,12 @@ Open a shell:
 
 	M-x eshell
 
+## Customizations
+
+You want to customize js2-mode or web-mode, but have no about the variables. Use this trick:
+
+	M-x customize-group [RET] <enter-mode> [RET]
+
 Fullscreen
 
     M-x toggle-frame-fullscreen	
@@ -211,16 +241,35 @@ Increase font size:
 
 Decrease font size
 
-    C-x - (hold and repeat)
-
-## Mode Customizations
-
-Sometimes you want to customize js2-mode or web-mode, but have no about the variables. Use this trick:
-
-	M-x customize-group [RET] <enter-mode> [RET]
+	C-x - (hold and repeat)
 
 ## Emmet
 
 Expand any css-like [abbreviations](https://github.com/smihica/emmet-mode)
 
 	C-j
+
+Write 15 ul/li/img tags with expanded attributes in a single line:
+
+	ul.gallery>li.gallery__item$*15>img[src="http://www.placehold.it/300x300"]
+
+## Web Mode
+
+Toggle Code folding
+
+	C-c C-f
+
+Jump to closing tag
+
+	C-c C-n
+
+Toggle comments
+
+	M-;
+
+Select tag block (say, an entire <header>)
+
+	C-c C-m
+	
+
+
