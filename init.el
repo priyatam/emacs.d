@@ -238,12 +238,10 @@
 ;; Javascript
 
 (require 'js2-mode)
-(require 'jsx-mode)
 (require 'flycheck)
 
 (add-to-list 'auto-mode-alist '("\\.js" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.jsx\\'" . jsx-mode))
 
 ;; setup paredit for js
 (require 'js)
@@ -264,12 +262,15 @@
 
 (require 'scss-mode)
 (setq scss-sass-command "node-sass")
+(setq-default scss-compile-at-save nil)
 
 ;; HTML/Templates
 
 (require 'web-mode)
+(require 'sws-mode)
+(require 'jsx-mode)
 
-;;(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . jsx-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 
@@ -278,6 +279,7 @@
 (require 'emmet-mode)
 (add-hook 'sgml-mode-hook 'emmet-mode)
 (add-hook 'css-mode-hook  'emmet-mode)
+(add-hook 'html-mode-hook  'emmet-mode)
 
 (add-hook 'emmet-mode-hook (lambda () (setq emmet-indentation 2)))
 (setq emmet-move-cursor-between-quotes t)
