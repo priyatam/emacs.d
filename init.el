@@ -1,8 +1,9 @@
 (require 'package)
 
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-(add-to-list 'package-archives '("tromey" . "http://tromey.com/elpa/") t)
+;;(add-to-list 'package-archives '("tromey" . "http://tromey.com/elpa/") t)
 
 (package-initialize)
 
@@ -244,6 +245,16 @@
   (textarea 'defun))
 
 (setq-default fill-column 80)
+
+;; SCALA
+
+(push "/usr/local/bin/scala" exec-path)
+(push "/usr/local/bin/sbt" exec-path)
+
+(require 'ensime)
+
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
 
 ;; Static Code Analyzer
 
