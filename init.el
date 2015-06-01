@@ -61,8 +61,8 @@
 
 ;; FONTS
 
-(set-default-font "Source Code Pro 18")
-(setq-default line-spacing 4)
+(set-default-font "Source Code Pro 16")
+(setq-default line-spacing 3)
 
 ;; GUI
 
@@ -70,6 +70,9 @@
 (setq inhibit-startup-message t)
 
 (toggle-frame-fullscreen)
+
+(setq-default fill-column 80)
+(setq column-number-mode t)
 
 ;; turn off mouse interface early in startup to avoid momentary display
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
@@ -106,6 +109,17 @@
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
+
+;; dired mode (+ dired-x)
+(add-hook 'dired-load-hook
+          (lambda ()
+            (load "dired-x")
+            ;; Set dired-x global variables here.
+            (setq dired-omit-files
+                  (concat dired-omit-files "\\|.DS_Store$|"))))
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (dired-omit-mode 1)))
 
 ;; ido
 (global-set-key (kbd "C-x f") 'find-file-in-project)
@@ -172,10 +186,10 @@
 (setq nrepl-log-messages t)
 (setq nrepl-hide-special-buffers t)
 
-(setq cider-repl-pop-to-buffer-on-connect nil)
+;;(setq cider-repl-pop-to-buffer-on-connect nil)
 (setq cider-show-error-buffer 'except-in-repl)
 (setq cider-stacktrace-default-filters '(java repl tooling dup))
-(setq cider-repl-display-in-current-window t)
+;;(setq cider-repl-display-in-current-window t)
 (setq cider-switch-to-repl-command #'cider-switch-to-current-repl-buffer)
 
 ;; switch current buffer into repl
@@ -196,12 +210,22 @@
 
 (require 'whitespace)
 
+(add-to-list 'auto-mode-alist '("\\.boot\\'" . clojure-mode))
+
 (add-hook 'clojure-mode-hook (lambda () (whitespace-mode t)))
 (add-hook 'clojurescript-mode-hook (lambda () (whitespace-mode t)))
 (setq whitespace-style '(face lines-tail trailing))
 (setq whitespace-line-column 84)
 
+;; indent hiccup, expectations,
 (define-clojure-indent
+  (expect 'defun)
+  (expect-let 'defun)
+  (given 'defun)
+  (context 1)
+  (freeze-time 1)
+  (redef-state 1)
+  (from-each 1)
   (component 'defun)
   (div 'defun)
   (span 'defun)
