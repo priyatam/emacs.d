@@ -176,9 +176,15 @@ Push
 
 ### Eval
 
+### Clojure
+
 Start Cider:
 
     M-x cider-connect
+
+Switc to REPL view:
+
+	C-c C-z
 
 Start a dedicated repl:
 
@@ -224,6 +230,11 @@ Wrap parens: place cursor before the symbol
 Open a shell:
 
 	M-x eshell
+
+Set column width
+
+	(setq column-number-mode t)
+	M-Q
 
 ## Customizations
 
