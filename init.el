@@ -1,7 +1,7 @@
 (require 'package)
 
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+;; (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 ;;(add-to-list 'package-archives '("tromey" . "http://tromey.com/elpa/") t)
 
@@ -65,6 +65,10 @@
 (set-default-font "Source Code Pro 16")
 (setq-default line-spacing 3)
 
+;; Tabs
+
+(setq-default tab-width 4)
+
 ;; GUI
 
 ;; no splash screen
@@ -76,7 +80,7 @@
 (setq column-number-mode t)
 
 ;; turn off mouse interface early in startup to avoid momentary display
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+;;(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 ;; (if (fboundp 'fringe-mode) (fringe-mode 0))
@@ -91,6 +95,11 @@
 (set-cursor-color "#ffffff")
 
 (global-linum-mode)
+
+(require 'golden-ratio)
+
+(golden-ratio-mode 1)
+(setq golden-ratio-auto-scale t)
 
 ;; THEMES
 
@@ -175,6 +184,9 @@
 (setq magit-highlight-whitespace nil)
 
 (global-set-key (kbd "C-c g") 'magit-status)
+
+;; EDITOR CONFIG
+
 
 ;; CIDER
 
