@@ -1,7 +1,8 @@
 (require 'package)
 
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
-;; (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+;;(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 ;;(add-to-list 'package-archives '("tromey" . "http://tromey.com/elpa/") t)
 
@@ -42,6 +43,12 @@
   (package-install 'neotree))
 (unless (package-installed-p 'emmet-mode)
   (package-install 'emmet-mode))
+(unless (package-installed-p 'golden-ratio)
+  (package-install 'golden-ratio))
+(unless (package-installed-p 'color-theme)
+  (package-install 'color-theme))
+(unless (package-installed-p 'ensime)
+  (package-install 'ensime))
 ;;(unless (package-installed-p 'flycheck-clojure)
 ;;(package-install 'flycheck-clojure))
 
@@ -107,7 +114,7 @@
 (load-theme 'zenburn t)
 
 (require 'color-theme)
-(color-theme-initialize)
+;; (color-theme-initialize)
 
 ;; SOUNDS
 
