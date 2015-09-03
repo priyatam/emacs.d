@@ -2,7 +2,7 @@
 
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
 ;;(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;; (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 ;;(add-to-list 'package-archives '("tromey" . "http://tromey.com/elpa/") t)
 
@@ -47,8 +47,8 @@
   (package-install 'golden-ratio))
 (unless (package-installed-p 'color-theme)
   (package-install 'color-theme))
-(unless (package-installed-p 'ensime)
-  (package-install 'ensime))
+;;(unless (package-installed-p 'ensime)
+;;  (package-install 'ensime))
 ;;(unless (package-installed-p 'flycheck-clojure)
 ;;(package-install 'flycheck-clojure))
 
@@ -69,7 +69,7 @@
 
 ;; FONTS
 
-(set-default-font "Source Code Pro 16")
+(set-default-font "Source Code Pro Light 16")
 (setq-default line-spacing 3)
 
 ;; Tabs
@@ -267,18 +267,16 @@
 
 ;; SCALA
 
-(push "/usr/local/bin/scala" exec-path)
-(push "/usr/local/bin/sbt" exec-path)
+;; (push "/usr/local/bin/scala" exec-path)
+;; (push "/usr/local/bin/sbt" exec-path)
 
-(require 'ensime)
-
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-
+;;(require 'ensime)
+;; (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
 ;; Static Code Analyzer
 
-(eval-after-load 'flycheck '(flycheck-clojure-setup))
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;; (eval-after-load 'flycheck '(flycheck-clojure-setup))
+;; (add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; Flycheck
 
