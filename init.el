@@ -1,3 +1,4 @@
+
 (require 'package)
 
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
@@ -20,42 +21,30 @@
 ;;(require 'cask "/usr/local/share/emacs/site-lisp/cask/cask.el")
 ;;(cask-initialize)
 
-(unless (package-installed-p 'cider)
-  (package-install 'cider))
-(unless (package-installed-p 'paredit)
-  (package-install 'paredit))
-(unless (package-installed-p 'rainbow-delimiters)
-  (package-install 'rainbow-delimiters))
-(unless (package-installed-p 'company)
-  (package-install 'company))
-(unless (package-installed-p 'projectile)
-  (package-install 'projectile))
-(unless (package-installed-p 'magit)
-  (package-install 'magit))
-(unless (package-installed-p 'smart-mode-line)
-  (package-install 'smart-mode-line))
-(unless (package-installed-p 'whitespace)
-  (package-install 'whitespace))
-(unless (package-installed-p 'js2-mode)
-  (package-install 'js2-mode))
-(unless (package-installed-p 'scss-mode)
-  (package-install 'scss-mode))
-(unless (package-installed-p 'markdown-mode)
-  (package-install 'markdown-mode))
-(unless (package-installed-p 'neotree)
-  (package-install 'neotree))
-(unless (package-installed-p 'emmet-mode)
-  (package-install 'emmet-mode))
-(unless (package-installed-p 'golden-ratio)
-  (package-install 'golden-ratio))
-(unless (package-installed-p 'color-theme)
-  (package-install 'color-theme))
-(unless (package-installed-p 'yaml-mode)
-  (package-install 'yaml-mode))
-;;(unless (package-installed-p 'ensime)
-;;  (package-install 'ensime))
-(unless (package-installed-p 'flycheck-clojure)
-(package-install 'flycheck-clojure))
+(mapc
+ (lambda (package)
+   (unless (package-installed-p package)
+     (package-install package)))
+ '(s cider
+	 color-theme
+	 company
+	 emmet-mode
+	 ;; ensime
+	 flycheck
+	 flycheck-clojure
+	 golden-ratio
+	 js2-mode
+	 magit
+	 markdown-mode
+	 paredit
+	 projectile
+	 rainbow-delimiters
+	 smart-mode-line
+	 scss-mode
+	 whitespace
+	 yaml-mode))
+
+;; 'ensime
 
 ;; STARTUP
 
