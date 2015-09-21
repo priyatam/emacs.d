@@ -17,6 +17,9 @@
 ;;   (when (not (package-installed-p p))
 ;;     (package-install p)))
 
+;;(require 'cask "/usr/local/share/emacs/site-lisp/cask/cask.el")
+;;(cask-initialize)
+
 (unless (package-installed-p 'cider)
   (package-install 'cider))
 (unless (package-installed-p 'paredit)
@@ -29,14 +32,14 @@
   (package-install 'projectile))
 (unless (package-installed-p 'magit)
   (package-install 'magit))
+(unless (package-installed-p 'smart-mode-line)
+  (package-install 'smart-mode-line))
 (unless (package-installed-p 'whitespace)
   (package-install 'whitespace))
 (unless (package-installed-p 'js2-mode)
   (package-install 'js2-mode))
 (unless (package-installed-p 'scss-mode)
   (package-install 'scss-mode))
-(unless (package-installed-p 'less-css-mode)
-  (package-install 'less-css-mode))
 (unless (package-installed-p 'markdown-mode)
   (package-install 'markdown-mode))
 (unless (package-installed-p 'neotree)
@@ -47,10 +50,12 @@
   (package-install 'golden-ratio))
 (unless (package-installed-p 'color-theme)
   (package-install 'color-theme))
+(unless (package-installed-p 'yaml-mode)
+  (package-install 'yaml-mode))
 ;;(unless (package-installed-p 'ensime)
 ;;  (package-install 'ensime))
-;;(unless (package-installed-p 'flycheck-clojure)
-;;(package-install 'flycheck-clojure))
+(unless (package-installed-p 'flycheck-clojure)
+(package-install 'flycheck-clojure))
 
 ;; STARTUP
 
@@ -65,11 +70,16 @@
 (set-exec-path-from-shell-PATH)
 (add-to-list 'exec-path "/usr/local/bin")
 
+;; Smart line
+
+(setq sml/no-confirm-load-theme t)
+(sml/setup)
+
 ;; (setq default-directory "~/github/")
 
 ;; FONTS
 
-(set-default-font "Source Code Pro Light 16")
+(set-default-font "Source Code Pro Light 14")
 (setq-default line-spacing 3)
 
 ;; Tabs
@@ -195,6 +205,10 @@
 ;; EDITOR CONFIG
 
 
+;; SWIFT
+
+;;(add-to-list 'flycheck-checkers 'swift)
+
 ;; CIDER
 
 (require 'cider-mode)
@@ -276,7 +290,7 @@
 ;; Static Code Analyzer
 
 ;; (eval-after-load 'flycheck '(flycheck-clojure-setup))
-;; (add-hook 'after-init-hook #'global-flycheck-mode)
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; Flycheck
 
@@ -325,6 +339,14 @@
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . jsx-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+
+;; YAML
+
+(require 'yaml-mode)
+
+(add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+
 
 ;; Emmet
 
@@ -392,6 +414,9 @@ Including indent-buffer, which should not be called automatically on save."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(css-indent-offset 2)
+ '(custom-safe-themes
+   (quote
+	("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
  '(js2-basic-offset 2)
  '(js2-bounce-indent-p t)
  '(js2-missing-semi-one-line-override t)
