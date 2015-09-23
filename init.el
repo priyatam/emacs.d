@@ -1,4 +1,5 @@
 
+
 (require 'package)
 
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
@@ -42,6 +43,7 @@
 	 rainbow-delimiters
 	 smart-mode-line
 	 scss-mode
+	 web-mode
 	 whitespace
 	 yaml-mode))
 
@@ -331,10 +333,8 @@
 ;; HTML/Templates
 
 (require 'web-mode)
-(require 'sws-mode)
-(require 'jsx-mode)
 
-(add-to-list 'auto-mode-alist '("\\.jsx\\'" . jsx-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 
@@ -344,7 +344,6 @@
 
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-
 
 ;; Emmet
 
