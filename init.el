@@ -26,6 +26,7 @@
    (unless (package-installed-p package)
      (package-install package)))
  '(s cider
+	 cider-eval-sexp-fu
 	 color-theme
 	 company
 	 emmet-mode
@@ -43,8 +44,6 @@
 	 scss-mode
 	 whitespace
 	 yaml-mode))
-
-;; 'ensime
 
 ;; STARTUP
 
@@ -68,7 +67,7 @@
 
 ;; FONTS
 
-(set-default-font "Source Code Pro Light 14")
+(set-default-font "Source Code Pro Light 16")
 (setq-default line-spacing 3)
 
 ;; Tabs
@@ -104,8 +103,8 @@
 
 (require 'golden-ratio)
 
-(golden-ratio-mode 1)
-(setq golden-ratio-auto-scale t)
+;; (golden-ratio-mode 1)
+;; (setq golden-ratio-auto-scale t)
 
 ;; THEMES
 
@@ -198,9 +197,11 @@
 
 ;;(add-to-list 'flycheck-checkers 'swift)
 
-;; CIDER
+;; CLOJURE
 
 (require 'cider-mode)
+(require 'clojure-mode)
+(require 'cider-eval-sexp-fu)
 
 (global-company-mode)
 
@@ -219,9 +220,10 @@
 (setq cider-repl-display-in-current-window t)
 
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-(add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'clojure-mode-hook 'paredit-mode)
-(add-hook 'cider-mode-hook #'eldoc-mode)
+(add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'clojure-mode-hook #'paredit-mode)
+(add-hook 'cider-repl-mode-hook #'paredit-mode)
+(add-hook 'clojure-mode-hook #'eldoc-mode)
 
 (show-paren-mode 1)
 
@@ -265,6 +267,13 @@
   (h6 'defun)
   (button 'defun)
   (textarea 'defun))
+
+(defun clj-refactor-mode-hook ()
+    (clj-refactor-mode 1)
+    (yas-minor-mode 1) ; for adding require/use/import
+    (cljr-add-keybindings-with-prefix "C-c C-m"))
+
+;; (add-hook 'clojure-mode-hook #'my-clojure-mode-hook)
 
 (setq-default fill-column 80)
 
