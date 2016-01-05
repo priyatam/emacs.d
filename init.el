@@ -1,5 +1,3 @@
-
-
 (require 'package)
 
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
@@ -22,6 +20,8 @@
 ;;(require 'cask "/usr/local/share/emacs/site-lisp/cask/cask.el")
 ;;(cask-initialize)
 
+(global-prettify-symbols-mode 1)
+
 (mapc
  (lambda (package)
    (unless (package-installed-p package)
@@ -34,6 +34,7 @@
 	 ;; ensime
 	 flycheck
 	 flycheck-clojure
+	 git-timemachine
 	 golden-ratio
 	 js2-mode
 	 magit
@@ -43,8 +44,10 @@
 	 rainbow-delimiters
 	 smart-mode-line
 	 scss-mode
+	 swift-mode
 	 web-mode
 	 whitespace
+	 writeroom-mode
 	 yaml-mode))
 
 ;; STARTUP
@@ -69,7 +72,7 @@
 
 ;; FONTS
 
-(set-default-font "Source Code Pro Light 16")
+(set-default-font "Source Code Pro Light 14")
 (setq-default line-spacing 3)
 
 ;; Tabs
@@ -102,6 +105,7 @@
 (set-cursor-color "#ffffff")
 
 (global-linum-mode)
+;;(global-writeroom-mode)
 
 (require 'golden-ratio)
 
@@ -119,6 +123,8 @@
 ;; SOUNDS
 
 (setq ring-bell-function 'ignore)
+
+;; LINES
 
 ;; FILES
 
@@ -192,12 +198,20 @@
 
 (global-set-key (kbd "C-c g") 'magit-status)
 
+;; WRITEROOM
+(require 'writeroom-mode)
+(add-hook 'writeroom-mode
+   (define-key writeroom-mode-map (kbd "s-?") nil)
+   (define-key writeroom-mode-map (kbd "C-c w") #'writeroom-toggle-mode-line))
+
+(setq writeroom-width 130)
+ 
 ;; EDITOR CONFIG
 
 
 ;; SWIFT
 
-;;(add-to-list 'flycheck-checkers 'swift)
+;; (add-to-list 'flycheck-checkers 'swift)
 
 ;; CLOJURE
 
@@ -290,7 +304,6 @@
 ;; Static Code Analyzer
 
 ;; (eval-after-load 'flycheck '(flycheck-clojure-setup))
-(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; Flycheck
 
@@ -323,11 +336,10 @@
 
 ;; CSS3/SCSS/Less
 
-(require 'less-css-mode)
-(add-to-list 'auto-mode-alist '("\\.less\\'" . less-css-mode))
-
 (require 'scss-mode)
 (setq scss-sass-command "node-sass")
+(add-to-list 'auto-mode-alist '("\\.sass\\'" . scss-mode))
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 (setq-default scss-compile-at-save nil)
 
 ;; HTML/Templates
@@ -362,7 +374,6 @@
 
 ;; KEY BINDINGS
 
-(global-set-key [f1] 'neotree-dir)
 (global-set-key [f2] 'cider-jack-in)
 (global-set-key [f3] 'cider-switch-to-repl-buffer)
 
@@ -382,6 +393,12 @@
 (global-set-key (kbd "<S-down>")  'windmove-down)
 (global-set-key (kbd "<S-left>")  'windmove-left)
 (global-set-key (kbd "<S-right>") 'windmove-right)
+
+(add-hook 'swift-mode-hook
+          (lambda ()
+			(local-set-key  (kbd "C-c M-j") 'swift-mode-run-repl)
+			(local-set-key  (kbd "C-x C-e") 'swift-mode-send-region)
+			(local-set-key  (kbd "C-c C-k") 'swift-mode-send-buffer)))
 
 ;; CUSTOM FUNCTIONS
 
@@ -410,16 +427,44 @@ Including indent-buffer, which should not be called automatically on save."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default bold shadow italic underline bold bold-italic bold])
+ '(ansi-color-names-vector
+   (vector "#4d4d4c" "#c82829" "#718c00" "#eab700" "#4271ae" "#8959a8" "#3e999f" "#ffffff"))
  '(css-indent-offset 2)
+ '(custom-enabled-themes (quote (sanityinc-tomorrow-bright)))
  '(custom-safe-themes
    (quote
-	("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
+	("1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
+ '(fci-rule-color "#d6d6d6")
  '(js2-basic-offset 2)
  '(js2-bounce-indent-p t)
  '(js2-missing-semi-one-line-override t)
  '(js2-strict-missing-semi-warning nil)
  '(jsx-indent-level 2)
  '(jsx-use-flymake t)
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   (quote
+	((20 . "#c82829")
+	 (40 . "#f5871f")
+	 (60 . "#eab700")
+	 (80 . "#718c00")
+	 (100 . "#3e999f")
+	 (120 . "#4271ae")
+	 (140 . "#8959a8")
+	 (160 . "#c82829")
+	 (180 . "#f5871f")
+	 (200 . "#eab700")
+	 (220 . "#718c00")
+	 (240 . "#3e999f")
+	 (260 . "#4271ae")
+	 (280 . "#8959a8")
+	 (300 . "#c82829")
+	 (320 . "#f5871f")
+	 (340 . "#eab700")
+	 (360 . "#718c00"))))
+ '(vc-annotate-very-old-color nil)
  '(web-mode-attr-indent-offset 2)
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
