@@ -72,7 +72,7 @@
 
 ;; FONTS
 
-(set-default-font "Source Code Pro Light 14")
+(set-default-font "Source Code Pro Light 16")
 (setq-default line-spacing 3)
 
 ;; Tabs
