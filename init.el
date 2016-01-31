@@ -1,26 +1,15 @@
 (require 'package)
 
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
-;;(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-;; (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-;;(add-to-list 'package-archives '("tromey" . "http://tromey.com/elpa/") t)
 
 (package-initialize)
 
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-;; (defvar tmtxt/packages
-;;   '(package1 package2 package3 package4 package5))
-;; (dolist (p tmtxt/packages)
-;;   (when (not (package-installed-p p))
-;;     (package-install p)))
-
 ;;(require 'cask "/usr/local/share/emacs/site-lisp/cask/cask.el")
 ;;(cask-initialize)
-
-(global-prettify-symbols-mode 1)
 
 (mapc
  (lambda (package)
@@ -34,6 +23,7 @@
 	 ;; ensime
 	 flycheck
 	 flycheck-clojure
+	 flycheck-pos-tip
 	 git-timemachine
 	 golden-ratio
 	 js2-mode
@@ -44,15 +34,31 @@
 	 rainbow-delimiters
 	 smart-mode-line
 	 scss-mode
-	 swift-mode
 	 web-mode
 	 whitespace
 	 writeroom-mode
 	 yaml-mode))
 
-;; STARTUP
+(require 'emmet-mode)
+(require 'color-theme)
+(require 'cider-mode)
+(require 'clojure-mode)
+(require 'cider-eval-sexp-fu)
+(require 'flycheck)
+(require 'golden-ratio)
+(require 'js)
+(require 'js2-mode)
+(require 'markdown-mode)
+(require 'scss-mode)
+(require 'web-mode)
+(require 'whitespace)
+(require 'writeroom-mode)
+(require 'yaml-mode)
 
-(defun set-exec-path-from-shell-PATH ()
+(global-prettify-symbols-mode 1)
+
+;; Startup
+(defun set-exec-path-from-shell ()
   (interactive)
   (let ((path-from-shell
          (replace-regexp-in-string "[ \t\n]*$" ""
@@ -60,32 +66,52 @@
     (setenv "PATH" path-from-shell)
     (setq exec-path (split-string path-from-shell path-separator))))
 
-(set-exec-path-from-shell-PATH)
+(set-exec-path-from-shell)
 (add-to-list 'exec-path "/usr/local/bin")
 
 ;; Smart line
-
 (setq sml/no-confirm-load-theme t)
 (sml/setup)
 
 ;; (setq default-directory "~/github/")
 
-;; FONTS
+;; Fonts
+(when (window-system)
+  (set-default-font "Fira Code Light 14"))
 
-(set-default-font "Source Code Pro Light 16")
 (setq-default line-spacing 3)
 
-;; Tabs
+(let ((alist '((33 . ".\\(?:\\(?:==\\)\\|[!=]\\)")
+               (35 . ".\\(?:[(?[_{]\\)")
+               (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
+               (42 . ".\\(?:\\(?:\\*\\*\\)\\|[*/]\\)")
+               (43 . ".\\(?:\\(?:\\+\\+\\)\\|\\+\\)")
+               (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
+               ;;(46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=]\\)")
+               (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
+               (58 . ".\\(?:[:=]\\)")
+               (59 . ".\\(?:;\\)")
+               (60 . ".\\(?:\\(?:!--\\)\\|\\(?:\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[/<=>|-]\\)")
+               (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
+               (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
+               (63 . ".\\(?:[:=?]\\)")
+               (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
+               (94 . ".\\(?:=\\)")
+               (123 . ".\\(?:-\\)")
+               (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
+               (126 . ".\\(?:[=@~-]\\)")
+			   )
+			 ))
+  (dolist (char-regexp alist)
+	(set-char-table-range composition-function-table (car char-regexp)
+						  `([,(cdr char-regexp) 0 font-shape-gstring]))))
 
+;; Tabs
 (setq-default tab-width 4)
 
 ;; GUI
-
-;; no splash screen
 (setq inhibit-startup-message t)
-
 (toggle-frame-fullscreen)
-
 (setq-default fill-column 80)
 (setq column-number-mode t)
 
@@ -96,50 +122,36 @@
 ;; (if (fboundp 'fringe-mode) (fringe-mode 0))
 
 ;; scroll one line at a time (less "jumpy" than defaults)
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-scroll-amount '(2 ((shift) . 2))) ;; one line at a time
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
-
 (setq cursor-type 'bar)
 (set-cursor-color "#ffffff")
 
 (global-linum-mode)
-;;(global-writeroom-mode)
 
-(require 'golden-ratio)
+;;(setq golden-ratio-auto-scale t)
 
-;; (golden-ratio-mode 1)
-;; (setq golden-ratio-auto-scale t)
-
-;; THEMES
-
+;; Themes
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'zenburn t)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/")
 
-(require 'color-theme)
-;; (color-theme-initialize)
-
-;; SOUNDS
-
+;; Sounds
 (setq ring-bell-function 'ignore)
 
-;; LINES
-
-;; FILES
-
+;; Files
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
-;; dired mode (+ dired-x)
 (add-hook 'dired-load-hook
           (lambda ()
             (load "dired-x")
             ;; Set dired-x global variables here.
             (setq dired-omit-files
-                  (concat dired-omit-files "\\|.DS_Store$|"))))
+                  (concat dired-omit-files "\\|.DS_Store$|.git|"))))
 (add-hook 'dired-mode-hook
           (lambda ()
             (dired-omit-mode 1)))
@@ -159,9 +171,6 @@
       `(("." . ,(expand-file-name "~/emacs.d/backups"))))
 (setq auto-save-file-name-transforms
       `((".*" ,(expand-file-name "~/emacs.d/backups") t)))
-
-(fset 'gui-diff-last-failure
-      (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([18 97 99 116 117 97 108 58 13 134217734 19 40 61 13 right 201326624 201326624 134217847 134217790 40 103 117 105 45 100 105 102 102 32 25 41] 0 "%d")) arg)))
 
 ;; enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -192,64 +201,44 @@
 
 (winner-mode)
 
-;; GIT/MAGIT
+;; Magit
 
 (setq magit-highlight-whitespace nil)
-
 (global-set-key (kbd "C-c g") 'magit-status)
 
-;; WRITEROOM
-(require 'writeroom-mode)
+;; Writeroom
 (add-hook 'writeroom-mode
    (define-key writeroom-mode-map (kbd "s-?") nil)
    (define-key writeroom-mode-map (kbd "C-c w") #'writeroom-toggle-mode-line))
 
 (setq writeroom-width 130)
  
-;; EDITOR CONFIG
-
-
-;; SWIFT
-
-;; (add-to-list 'flycheck-checkers 'swift)
-
-;; CLOJURE
-
-(require 'cider-mode)
-(require 'clojure-mode)
-(require 'cider-eval-sexp-fu)
+;; Clojure
 
 (global-company-mode)
 
 (add-hook 'after-init-hook 'global-company-mode)
-
-(setq nrepl-log-messages t)
-(setq nrepl-hide-special-buffers t)
-
-;;(setq cider-repl-pop-to-buffer-on-connect nil)
-(setq cider-show-error-buffer 'except-in-repl)
-(setq cider-stacktrace-default-filters '(java repl tooling dup))
-;;(setq cider-repl-display-in-current-window t)
-(setq cider-switch-to-repl-command #'cider-switch-to-current-repl-buffer)
-
-;; switch current buffer into repl
-(setq cider-repl-display-in-current-window t)
-
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'clojure-mode-hook #'paredit-mode)
 (add-hook 'cider-repl-mode-hook #'paredit-mode)
 (add-hook 'clojure-mode-hook #'eldoc-mode)
 
+(setq nrepl-log-messages t)
+(setq nrepl-hide-special-buffers t)
+(setq cider-repl-pop-to-buffer-on-connect nil)
+(setq cider-show-error-buffer 'except-in-repl)
+(setq cider-stacktrace-default-filters '(java repl tooling dup))
+;;(setq cider-repl-display-in-current-window t)
+(setq cider-switch-to-repl-command #'cider-switch-to-current-repl-buffer)
+(setq cider-repl-display-in-current-window t)
+
 (show-paren-mode 1)
 
-;; popup contextual docs
 (eval-after-load "cider"
   '(define-key cider-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc))
 
 ;; Clojure Coding Standards
-
-(require 'whitespace)
 
 (add-to-list 'auto-mode-alist '("\\.boot\\'" . clojure-mode))
 
@@ -258,7 +247,6 @@
 (setq whitespace-style '(face lines-tail trailing))
 (setq whitespace-line-column 84)
 
-;; indent hiccup, expectations,
 (define-clojure-indent
   (expect 'defun)
   (expect-let 'defun)
@@ -289,77 +277,60 @@
     (yas-minor-mode 1) ; for adding require/use/import
     (cljr-add-keybindings-with-prefix "C-c C-m"))
 
-;; (add-hook 'clojure-mode-hook #'my-clojure-mode-hook)
+(eval-after-load 'clojure-mode
+  '(progn
+     (define-key clojure-mode-map (kbd "C-c C-h") #'clojure-cheatsheet)))
 
 (setq-default fill-column 80)
 
-;; SCALA
+;; Flycheck
+(eval-after-load 'flycheck '(flycheck-clojure-setup))
+;; (add-hook 'after-init-hook #'global-flycheck-mode)
+;; (add-hook 'clojure-mode-hook #'my-clojure-mode-hook)
+
+;; Hoplon
+(add-to-list 'auto-mode-alist '("\\.cljs\\.hl\\'" . clojure-mode))
+(add-to-list 'auto-mode-alist '("\\.boot\'" . clojure-mode))
+
+;; Scala
 
 ;; (push "/usr/local/bin/scala" exec-path)
 ;; (push "/usr/local/bin/sbt" exec-path)
 
-;;(require 'ensime)
+;; (require 'ensime)
 ;; (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
-;; Static Code Analyzer
-
-;; (eval-after-load 'flycheck '(flycheck-clojure-setup))
-
-;; Flycheck
-
-(add-hook 'after-init-hook #'global-flycheck-mode)
-
-;; Hoplon
-
-(add-to-list 'auto-mode-alist '("\\.cljs\\.hl\\'" . clojure-mode))
-(add-to-list 'auto-mode-alist '("\\.boot\'" . clojure-mode))
+;; BNF
+(load-file "~/.emacs.d/lib/bnf-mode.el")
+(add-to-list 'auto-mode-alist '("\\.bnf" . bnf-mode))
 
 ;; Javascript
-
-(require 'js2-mode)
-(require 'flycheck)
 
 (add-to-list 'auto-mode-alist '("\\.js" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 
 ;; setup paredit for js
-(require 'js)
 (define-key js-mode-map "{" 'paredit-open-curly)
 (define-key js-mode-map "}" 'paredit-close-curly-and-newline)
-(require 'flycheck)
 (add-hook 'js-mode-hook
           (lambda () (flycheck-mode t)))
 
-;; Coffeescript
-;;(require 'coffee-mode)
-;; (add-to-list 'auto-mode-alist '("\\.coffee\\'" . coffee-mode))
-
-;; CSS3/SCSS/Less
-
-(require 'scss-mode)
+;; CSS3/SCSS
 (setq scss-sass-command "node-sass")
 (add-to-list 'auto-mode-alist '("\\.sass\\'" . scss-mode))
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 (setq-default scss-compile-at-save nil)
 
 ;; HTML/Templates
-
-(require 'web-mode)
-
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 
 ;; YAML
-
-(require 'yaml-mode)
-
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 
 ;; Emmet
-
-(require 'emmet-mode)
 (add-hook 'sgml-mode-hook 'emmet-mode)
 (add-hook 'css-mode-hook  'emmet-mode)
 (add-hook 'html-mode-hook  'emmet-mode)
@@ -368,12 +339,9 @@
 (setq emmet-move-cursor-between-quotes t)
 
 ;; Markdown
-(require 'markdown-mode)
-
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 ;; KEY BINDINGS
-
 (global-set-key [f2] 'cider-jack-in)
 (global-set-key [f3] 'cider-switch-to-repl-buffer)
 
@@ -432,7 +400,10 @@ Including indent-buffer, which should not be called automatically on save."
  '(ansi-color-names-vector
    (vector "#4d4d4c" "#c82829" "#718c00" "#eab700" "#4271ae" "#8959a8" "#3e999f" "#ffffff"))
  '(css-indent-offset 2)
- '(custom-enabled-themes (quote (sanityinc-tomorrow-bright)))
+ '(custom-enabled-themes (quote (solarized-dark)))
+ '(custom-safe-themes
+   (quote
+	("fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
  '(fci-rule-color "#d6d6d6")
  '(js2-basic-offset 2)
  '(js2-bounce-indent-p t)
