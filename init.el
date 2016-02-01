@@ -77,7 +77,7 @@
 
 ;; Fonts
 (when (window-system)
-  (set-default-font "Fira Code Light 14"))
+  (set-default-font "Fira Code Light 16"))
 
 (setq-default line-spacing 3)
 
@@ -129,7 +129,9 @@
 (setq cursor-type 'bar)
 (set-cursor-color "#ffffff")
 
-(global-linum-mode)
+;;(global-linum-mode)
+
+(global-set-key (kbd "C-x C-l") 'global-linum-mode)
 
 ;;(setq golden-ratio-auto-scale t)
 
@@ -212,7 +214,11 @@
    (define-key writeroom-mode-map (kbd "C-c w") #'writeroom-toggle-mode-line))
 
 (setq writeroom-width 130)
- 
+
+(global-set-key (kbd "C-x C-w") 'writeroom-mode)
+
+;;(global-writeroom-mode)
+
 ;; Clojure
 
 (global-company-mode)
