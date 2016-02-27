@@ -45,6 +45,7 @@
 (require 'cider-mode)
 (require 'clojure-mode)
 (require 'cider-eval-sexp-fu)
+(require 'dired-x)
 (require 'flycheck)
 (require 'golden-ratio)
 (require 'js)
@@ -79,6 +80,8 @@
 ;; Fonts
 (when (window-system)
   (set-default-font "Fira Code Light 16"))
+  ;;(set-default-font "Nitti 16")
+  )
 
 (setq-default line-spacing 3)
 
@@ -149,12 +152,8 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
-(add-hook 'dired-load-hook
-          (lambda ()
-            (load "dired-x")
-            ;; Set dired-x global variables here.
-            (setq dired-omit-files
-                  (concat dired-omit-files "\\|.DS_Store$|.git|"))))
+(setq dired-omit-files "^\\...+$")
+
 (add-hook 'dired-mode-hook
           (lambda ()
             (dired-omit-mode 1)))
