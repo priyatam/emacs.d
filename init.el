@@ -25,6 +25,7 @@
 	 flycheck-clojure
 	 flycheck-pos-tip
 	 git-timemachine
+	 go-mode
 	 golden-ratio
 	 js2-mode
 	 magit
