@@ -80,8 +80,6 @@
 ;; Fonts
 (when (window-system)
   (set-default-font "Fira Code Light 16"))
-  ;;(set-default-font "Nitti 16")
-  )
 
 (setq-default line-spacing 3)
 
@@ -140,7 +138,6 @@
 ;;(setq golden-ratio-auto-scale t)
 
 ;; Themes
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/")
 
 ;; Sounds
@@ -209,15 +206,15 @@
 (global-set-key (kbd "C-c g") 'magit-status)
 
 ;; Writeroom
+
 (add-hook 'writeroom-mode
    (define-key writeroom-mode-map (kbd "s-?") nil)
    (define-key writeroom-mode-map (kbd "C-c w") #'writeroom-toggle-mode-line))
 
 (setq writeroom-width 130)
-
 (global-set-key (kbd "C-x C-w") 'writeroom-mode)
-
-;;(global-writeroom-mode)
+(global-writeroom-mode)
+(setq writeroom-major-modes '(text-mode clojure-mode clojurescript-mode))
 
 ;; Clojure
 
@@ -238,7 +235,7 @@
 ;;(setq cider-repl-display-in-current-window t)
 (setq cider-switch-to-repl-command #'cider-switch-to-current-repl-buffer)
 (setq cider-repl-display-in-current-window t)
-
+  
 (show-paren-mode 1)
 
 (eval-after-load "cider"
@@ -406,10 +403,10 @@ Including indent-buffer, which should not be called automatically on save."
  '(ansi-color-names-vector
    (vector "#4d4d4c" "#c82829" "#718c00" "#eab700" "#4271ae" "#8959a8" "#3e999f" "#ffffff"))
  '(css-indent-offset 2)
- '(custom-enabled-themes (quote (sanityinc-solarized-dark)))
+ '(custom-enabled-themes (quote (gotham)))
  '(custom-safe-themes
    (quote
-	("4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
+	("e3a57f02544b04d3cf6805b53fc1a94ca7c745de1317aff0d2fcc7b01ddd99d1" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
  '(fci-rule-color "#d6d6d6")
  '(js2-basic-offset 2)
  '(js2-bounce-indent-p t)
@@ -418,6 +415,26 @@ Including indent-buffer, which should not be called automatically on save."
  '(jsx-indent-level 2)
  '(jsx-use-flymake t)
  '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   (quote
+	((20 . "#dc322f")
+	 (40 . "#cb4b16")
+	 (60 . "#b58900")
+	 (80 . "#859900")
+	 (100 . "#2aa198")
+	 (120 . "#268bd2")
+	 (140 . "#d33682")
+	 (160 . "#6c71c4")
+	 (180 . "#dc322f")
+	 (200 . "#cb4b16")
+	 (220 . "#b58900")
+	 (240 . "#859900")
+	 (260 . "#2aa198")
+	 (280 . "#268bd2")
+	 (300 . "#d33682")
+	 (320 . "#6c71c4")
+	 (340 . "#dc322f")
+	 (360 . "#cb4b16"))))
  '(vc-annotate-very-old-color nil)
  '(web-mode-attr-indent-offset 2)
  '(web-mode-code-indent-offset 2)
