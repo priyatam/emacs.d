@@ -105,10 +105,6 @@
 (setq auto-save-file-name-transforms
       `((".*" ,(expand-file-name "~/emacs.d/backups") t)))
 
-;; BNF
-(load-file "~/.emacs.d/lib/bnf-mode.el")
-(add-to-list 'auto-mode-alist '("\\.bnf" . bnf-mode))
-
 ;; YAML
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
