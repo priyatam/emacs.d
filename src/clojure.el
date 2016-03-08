@@ -6,6 +6,7 @@
 (require 'flycheck)
 (require 'flycheck-clojure)
 (require 'flycheck-pos-tip)
+(require 'company)
 
 ;; Cider
 
