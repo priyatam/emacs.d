@@ -105,14 +105,6 @@
 (setq auto-save-file-name-transforms
       `((".*" ,(expand-file-name "~/emacs.d/backups") t)))
 
-;; Scala
-
-;; (push "/usr/local/bin/scala" exec-path)
-;; (push "/usr/local/bin/sbt" exec-path)
-
-;; (require 'ensime)
-;; (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-
 ;; BNF
 (load-file "~/.emacs.d/lib/bnf-mode.el")
 (add-to-list 'auto-mode-alist '("\\.bnf" . bnf-mode))
