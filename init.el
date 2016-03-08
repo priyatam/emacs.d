@@ -49,7 +49,6 @@
 (require 'golden-ratio)
 (require 'web-mode)
 (require 'whitespace)
-(require 'yaml-mode)
 
 ;; Environment -----
 
@@ -72,15 +71,12 @@
 (load "~/.emacs.d/src/git.el")
 (load "~/.emacs.d/src/gui.el")
 (load "~/.emacs.d/src/js.el")
-(load "~/.emacs.d/src/markdown.el")
+(load "~/.emacs.d/src/markups.el")
 (load "~/.emacs.d/src/typography.el")
 
 ;; Themes
 (add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/")
 
-;; YAML
-(add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 
 ;; KEY BINDINGS
 (global-set-key [f2] 'cider-jack-in)
