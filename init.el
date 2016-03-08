@@ -17,6 +17,7 @@
      (package-install package)))
  '(s cider
 	 cider-eval-sexp-fu
+	 clj-refactor
 	 color-theme
 	 company
 	 emmet-mode
@@ -43,10 +44,14 @@
 (require 'emmet-mode)
 (require 'color-theme)
 (require 'cider-mode)
+(require 'cider-eval-sexp-fu)
 (require 'clojure-mode)
+(require 'clj-refactor)
 (require 'cider-eval-sexp-fu)
 (require 'dired-x)
 (require 'flycheck)
+(require 'flycheck-clojure)
+(require 'flycheck-pos-tip)
 (require 'golden-ratio)
 (require 'js)
 (require 'js2-mode)
@@ -216,7 +221,7 @@
 (global-writeroom-mode)
 (setq writeroom-major-modes '(text-mode clojure-mode clojurescript-mode))
 
-;; Clojure
+;; Cider
 
 (global-company-mode)
 
@@ -227,6 +232,8 @@
 (add-hook 'cider-repl-mode-hook #'paredit-mode)
 (add-hook 'clojure-mode-hook #'eldoc-mode)
 
+(setq cider-prompt-for-symbol nil)
+(setq cider-prompt-save-file-on-load 'always-save)
 (setq nrepl-log-messages t)
 (setq nrepl-hide-special-buffers t)
 (setq cider-repl-pop-to-buffer-on-connect nil)
@@ -235,7 +242,12 @@
 ;;(setq cider-repl-display-in-current-window t)
 (setq cider-switch-to-repl-command #'cider-switch-to-current-repl-buffer)
 (setq cider-repl-display-in-current-window t)
-  
+(setq cider-repl-display-help-banner nil)
+(setq cider-interactive-eval-result-prefix ";; => ")
+(setq cider-font-lock-dynamically '(macro core function var))
+(setq cider-overlays-use-font-lock t)
+(setq cider-pprint-fn "fipp.edn/pprint")
+
 (show-paren-mode 1)
 
 (eval-after-load "cider"
@@ -280,6 +292,8 @@
     (yas-minor-mode 1) ; for adding require/use/import
     (cljr-add-keybindings-with-prefix "C-c C-m"))
 
+(add-hook 'clojure-mode-hook #'clj-refactor-mode-hook)
+
 (eval-after-load 'clojure-mode
   '(progn
      (define-key clojure-mode-map (kbd "C-c C-h") #'clojure-cheatsheet)))
@@ -288,8 +302,9 @@
 
 ;; Flycheck
 (eval-after-load 'flycheck '(flycheck-clojure-setup))
-;; (add-hook 'after-init-hook #'global-flycheck-mode)
-;; (add-hook 'clojure-mode-hook #'my-clojure-mode-hook)
+;;(add-hook 'after-init-hook #'global-flycheck-mode)
+;;(eval-after-load 'flycheck
+;;  '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
 
 ;; Hoplon
 (add-to-list 'auto-mode-alist '("\\.cljs\\.hl\\'" . clojure-mode))
