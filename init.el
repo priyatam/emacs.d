@@ -41,7 +41,6 @@
 	 writeroom-mode
 	 yaml-mode))
 
-(require 'emmet-mode)
 (require 'color-theme)
 (require 'dired-x)
 (require 'flycheck)
@@ -70,10 +69,10 @@
 ;; Load modules
 
 (load "~/.emacs.d/src/clojure.el")
+(load "~/.emacs.d/src/css.el")
 (load "~/.emacs.d/src/git.el")
 (load "~/.emacs.d/src/markdown.el")
 (load "~/.emacs.d/src/typography.el")
-(load "~/.emacs.d/src/css.el")
 
 ;; Tabs
 (setq-default tab-width 4)
@@ -190,22 +189,9 @@
 (add-hook 'js-mode-hook
           (lambda () (flycheck-mode t)))
 
-;; HTML/Templates
-(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-
 ;; YAML
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-
-;; Emmet
-(add-hook 'sgml-mode-hook 'emmet-mode)
-(add-hook 'css-mode-hook  'emmet-mode)
-(add-hook 'html-mode-hook  'emmet-mode)
-
-(add-hook 'emmet-mode-hook (lambda () (setq emmet-indentation 2)))
-(setq emmet-move-cursor-between-quotes t)
 
 ;; KEY BINDINGS
 (global-set-key [f2] 'cider-jack-in)
