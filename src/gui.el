@@ -10,12 +10,12 @@
 (setq ring-bell-function 'ignore)
 
 ;; Turn off mouse interface early in startup to avoid momentary display
-;; (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-;; (if (fboundp 'fringe-mode) (fringe-mode 0))
+;;(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+;;(if (fboundp 'fringe-mode) (fringe-mode 0))
 
-;; scroll one line at a time (less "jumpy" than defaults)
+;; Scroll one line at a time (less "jumpy" than defaults)
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 2))) ;; one line at a time
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
@@ -28,7 +28,7 @@
 
 ;;(setq golden-ratio-auto-scale t)
 
-;; enable y/n answers
+;; Enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (defadvice yes-or-no-p (around prevent-dialog activate)
@@ -41,9 +41,13 @@
   (let ((use-dialog-box nil))
     ad-do-it))
 
+;; Themes -----
+ 
+(add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/")
+
 ;; Navigation -----
 
-;; autocomplete finder 
+;; Autocomplete 
 (add-hook 'ido-setup-hook
           (lambda ()
             ;; avoiding need to use arrow keys!

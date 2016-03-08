@@ -74,10 +74,6 @@
 (load "~/.emacs.d/src/markups.el")
 (load "~/.emacs.d/src/typography.el")
 
-;; Themes
-(add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/")
-
-
 ;; KEY BINDINGS
 (global-set-key [f2] 'cider-jack-in)
 (global-set-key [f3] 'cider-switch-to-repl-buffer)
@@ -99,18 +95,11 @@
 (global-set-key (kbd "<S-left>")  'windmove-left)
 (global-set-key (kbd "<S-right>") 'windmove-right)
 
-(add-hook 'swift-mode-hook
-          (lambda ()
-			(local-set-key  (kbd "C-c M-j") 'swift-mode-run-repl)
-			(local-set-key  (kbd "C-x C-e") 'swift-mode-send-region)
-			(local-set-key  (kbd "C-c C-k") 'swift-mode-send-buffer)))
-
 ;; CUSTOM FUNCTIONS
 
 (defun hello-world (msg)
   (interactive "sMessage: ")
   (message msg))
-
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
