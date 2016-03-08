@@ -53,12 +53,10 @@
 (require 'scss-mode)
 (require 'web-mode)
 (require 'whitespace)
-(require 'writeroom-mode)
 (require 'yaml-mode)
 
-(global-prettify-symbols-mode 1)
+;; Environment -----
 
-;; Startup
 (defun set-exec-path-from-shell ()
   (interactive)
   (let ((path-from-shell
@@ -75,43 +73,7 @@
 (load "~/.emacs.d/src/clojure.el")
 (load "~/.emacs.d/src/git.el")
 (load "~/.emacs.d/src/markdown.el")
-
-;; Smart line
-(setq sml/no-confirm-load-theme t)
-(sml/setup)
-
-;; (setq default-directory "~/github/")
-
-;; Fonts
-(when (window-system)
-  (set-default-font "Fira Code Light 16"))
-
-(setq-default line-spacing 3)
-
-(let ((alist '((33 . ".\\(?:\\(?:==\\)\\|[!=]\\)")
-               (35 . ".\\(?:[(?[_{]\\)")
-               (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
-               (42 . ".\\(?:\\(?:\\*\\*\\)\\|[*/]\\)")
-               (43 . ".\\(?:\\(?:\\+\\+\\)\\|\\+\\)")
-               (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
-               ;;(46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=]\\)")
-               (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
-               (58 . ".\\(?:[:=]\\)")
-               (59 . ".\\(?:;\\)")
-               (60 . ".\\(?:\\(?:!--\\)\\|\\(?:\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[/<=>|-]\\)")
-               (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
-               (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
-               (63 . ".\\(?:[:=?]\\)")
-               (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
-               (94 . ".\\(?:=\\)")
-               (123 . ".\\(?:-\\)")
-               (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
-               (126 . ".\\(?:[=@~-]\\)")
-			   )
-			 ))
-  (dolist (char-regexp alist)
-	(set-char-table-range composition-function-table (car char-regexp)
-						  `([,(cdr char-regexp) 0 font-shape-gstring]))))
+(load "~/.emacs.d/src/typography.el")
 
 ;; Tabs
 (setq-default tab-width 4)
@@ -204,18 +166,6 @@
 (setq ido-use-filename-at-point nil)
 
 (winner-mode)
-
-;; Writeroom
-
-(add-hook 'writeroom-mode
-   (define-key writeroom-mode-map (kbd "s-?") nil)
-   (define-key writeroom-mode-map (kbd "C-c w") #'writeroom-toggle-mode-line))
-
-(setq writeroom-width 130)
-(global-set-key (kbd "C-x C-w") 'writeroom-mode)
-(global-writeroom-mode)
-(setq writeroom-major-modes '(text-mode clojure-mode clojurescript-mode))
-
 
 ;; Scala
 
