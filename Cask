@@ -1,6 +1,6 @@
 (source gnu)
 (source marmalade)
-(source melpa)
+(source melpa-stable)
 
 (depends-on "bind-key")
 (depends-on "cask")
@@ -31,7 +31,8 @@
 (depends-on "markdown-mode")
 (depends-on "multiple-cursors")
 (depends-on "nyan-mode")
-(depends-on "pallet")
+(depends-on "package-build" :git "https://github.com/milkypostman/melpa" :ref "master")
+(depends-on "pallet" :git "https://github.com/rdallasgray/pallet" :ref "master")
 (depends-on "paredit")
 (depends-on "popwin")
 (depends-on "prodigy")
