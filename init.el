@@ -47,8 +47,6 @@
 (require 'flycheck-clojure)
 (require 'flycheck-pos-tip)
 (require 'golden-ratio)
-(require 'js)
-(require 'js2-mode)
 (require 'web-mode)
 (require 'whitespace)
 (require 'yaml-mode)
@@ -71,6 +69,7 @@
 (load "~/.emacs.d/src/clojure.el")
 (load "~/.emacs.d/src/css.el")
 (load "~/.emacs.d/src/git.el")
+(load "~/.emacs.d/src/js.el")
 (load "~/.emacs.d/src/markdown.el")
 (load "~/.emacs.d/src/typography.el")
 
@@ -177,17 +176,6 @@
 ;; BNF
 (load-file "~/.emacs.d/lib/bnf-mode.el")
 (add-to-list 'auto-mode-alist '("\\.bnf" . bnf-mode))
-
-;; Javascript
-
-(add-to-list 'auto-mode-alist '("\\.js" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
-
-;; setup paredit for js
-(define-key js-mode-map "{" 'paredit-open-curly)
-(define-key js-mode-map "}" 'paredit-close-curly-and-newline)
-(add-hook 'js-mode-hook
-          (lambda () (flycheck-mode t)))
 
 ;; YAML
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
