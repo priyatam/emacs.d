@@ -1,4 +1,4 @@
-# Min Emacs
+# Dot Emacs
 
 My minimalist Emacs workflow, optimized for programming in Clojure, Cljs, Js,
 Go, Sass, HTML5 and Markdown.
@@ -19,7 +19,7 @@ Pacakges: I recommend [Magit](https://github.com/magit/magit),
 [Flycheck](http://www.flycheck.org),
 [Cider](https://github.com/clojure-emacs/cider),
 [FiraCode](https://github.com/tonsky/FiraCode), and many outstanding plugins
-from an outstanding community of Emacs hackers on [Melpa](https://melpa.org/#/)
+from a growing community of Emacs hackers on [Melpa](https://melpa.org/#/)
 
 ## Further Reading
 
@@ -28,4 +28,4 @@ I always wanted to learn Emacs. It was hard. Thanks to
 hard way in the winter of 2014. I'm not going back to any other IDE. 
 
 If you find my workflow useful, my cheatsheets and notes are being updated in
-the `wiki`.
+the [wiki](https://github.com/priyatam/emacs.d/wiki).
