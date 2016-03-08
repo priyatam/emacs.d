@@ -1,26 +1,31 @@
-Dot Emacs =========
+# Min Emacs
 
-My Emacs using config, optimized for programming in Clojure, Cljs, Js, Go, Sass,
-HTML5, and Markdown.
+My minimalist Emacs workflow, optimized for programming in Clojure, Cljs, Js,
+Go, Sass, HTML5 and Markdown.
+
+![](img/firacod-cider.png)
 
 ## Getting Started
 
 Install the latest version of Emacs and symlink Emacs.app to `~/Applications`:
 
     brew install emacs --cocoa --srgb brew linkapps Emacs
-
+	brew install cask
+	cask install
+	
 Clone this repo (init.el), and start Emacs.
+
+Pacakges: I recommend [Magit](https://github.com/magit/magit),
+[Flycheck](http://www.flycheck.org),
+[Cider](https://github.com/clojure-emacs/cider),
+[FiraCode](https://github.com/tonsky/FiraCode), and many outstanding plugins
+from an outstanding community of Emacs hackers on [Melpa](https://melpa.org/#/)
 
 ## Further Reading
 
-Emacs can be daunting for beginners. Has always been. I'm learning Emacs the
-hard-way and after a year and half, I'm not going back.
+I always wanted to learn Emacs. It was hard. Thanks to
+[Alex Baronosky](https://github.com/AlexBaranosky), I started learning Emacs the
+hard way in the winter of 2014. I'm not going back to any other IDE. 
 
-You can find my cheatsheets and docs under the `wiki`.
-
-I recommend [Magit](https://github.com/magit/magit),
-[Flycheck](http://www.flycheck.org),
-[FiraCode](https://github.com/tonsky/FiraCode), and other outstanding plugins
-that you will come to enjoy from a growing community of Emacs hackers.
-
-![](img/firacod-cider.png)
+If you find my workflow useful, my cheatsheets and notes are being updated in
+the `wiki`.
