@@ -50,7 +50,6 @@
 (require 'golden-ratio)
 (require 'js)
 (require 'js2-mode)
-(require 'scss-mode)
 (require 'web-mode)
 (require 'whitespace)
 (require 'yaml-mode)
@@ -74,6 +73,7 @@
 (load "~/.emacs.d/src/git.el")
 (load "~/.emacs.d/src/markdown.el")
 (load "~/.emacs.d/src/typography.el")
+(load "~/.emacs.d/src/css.el")
 
 ;; Tabs
 (setq-default tab-width 4)
@@ -190,12 +190,6 @@
 (add-hook 'js-mode-hook
           (lambda () (flycheck-mode t)))
 
-;; CSS3/SCSS
-(setq scss-sass-command "node-sass")
-(add-to-list 'auto-mode-alist '("\\.sass\\'" . scss-mode))
-(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
-(setq-default scss-compile-at-save nil)
-
 ;; HTML/Templates
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
@@ -212,7 +206,6 @@
 
 (add-hook 'emmet-mode-hook (lambda () (setq emmet-indentation 2)))
 (setq emmet-move-cursor-between-quotes t)
-
 
 ;; KEY BINDINGS
 (global-set-key [f2] 'cider-jack-in)
