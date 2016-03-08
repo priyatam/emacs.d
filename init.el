@@ -50,8 +50,6 @@
 (require 'web-mode)
 (require 'whitespace)
 
-;; Environment -----
-
 (defun set-exec-path-from-shell ()
   (interactive)
   (let ((path-from-shell
@@ -63,43 +61,15 @@
 (set-exec-path-from-shell)
 (add-to-list 'exec-path "/usr/local/bin")
 
-;; Load modules
-
 (load "~/.emacs.d/src/clojure.el")
 (load "~/.emacs.d/src/css.el")
 (load "~/.emacs.d/src/files.el")
 (load "~/.emacs.d/src/git.el")
 (load "~/.emacs.d/src/gui.el")
+(load "~/.emacs.d/src/keybindings.el")
 (load "~/.emacs.d/src/js.el")
 (load "~/.emacs.d/src/markups.el")
 (load "~/.emacs.d/src/typography.el")
-
-;; KEY BINDINGS
-(global-set-key [f2] 'cider-jack-in)
-(global-set-key [f3] 'cider-switch-to-repl-buffer)
-
-(global-set-key (kbd "S-C-<left>")  'shrink-window-horizontally)
-(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
-(global-set-key (kbd "S-C-<down>")  'shrink-window)
-(global-set-key (kbd "S-C-<up>")    'enlarge-window)
-(global-set-key (kbd "C-c C-r") 'rename-sgml-tag)
-
-(global-set-key [remap goto-line] 'goto-line)
-(global-set-key (kbd "C-x C-r") 'rename-current-buffer-file)
-(global-set-key (kbd "C-c n") 'cleanup-buffer)
-(global-set-key (kbd "C-x g") 'webjump)
-(global-set-key (kbd "C-x f") 'sudo-find-file)
-
-(global-set-key (kbd "<S-up>")    'windmove-up)
-(global-set-key (kbd "<S-down>")  'windmove-down)
-(global-set-key (kbd "<S-left>")  'windmove-left)
-(global-set-key (kbd "<S-right>") 'windmove-right)
-
-;; CUSTOM FUNCTIONS
-
-(defun hello-world (msg)
-  (interactive "sMessage: ")
-  (message msg))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
