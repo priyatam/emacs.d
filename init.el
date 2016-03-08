@@ -50,7 +50,6 @@
 (require 'golden-ratio)
 (require 'js)
 (require 'js2-mode)
-(require 'markdown-mode)
 (require 'scss-mode)
 (require 'web-mode)
 (require 'whitespace)
@@ -73,8 +72,9 @@
 
 ;; Load modules
 
-(load "~/.emacs.d/src/git.el")
 (load "~/.emacs.d/src/clojure.el")
+(load "~/.emacs.d/src/git.el")
+(load "~/.emacs.d/src/markdown.el")
 
 ;; Smart line
 (setq sml/no-confirm-load-theme t)
@@ -263,8 +263,6 @@
 (add-hook 'emmet-mode-hook (lambda () (setq emmet-indentation 2)))
 (setq emmet-move-cursor-between-quotes t)
 
-;; Markdown
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 ;; KEY BINDINGS
 (global-set-key [f2] 'cider-jack-in)
