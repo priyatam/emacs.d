@@ -76,6 +76,11 @@
 (set-exec-path-from-shell)
 (add-to-list 'exec-path "/usr/local/bin")
 
+
+;; Load modules
+
+(load "~/.emacs.d/src/git.el")
+
 ;; Smart line
 (setq sml/no-confirm-load-theme t)
 (sml/setup)
@@ -204,11 +209,6 @@
 (setq ido-use-filename-at-point nil)
 
 (winner-mode)
-
-;; Magit
-
-(setq magit-highlight-whitespace nil)
-(global-set-key (kbd "C-c g") 'magit-status)
 
 ;; Writeroom
 
