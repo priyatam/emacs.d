@@ -1,5 +1,6 @@
 (require 'emmet-mode)
 (require 'scss-mode)
+(require 'web-mode)
 
 ;; SCSS -----
 

@@ -3,6 +3,9 @@
 (require 'clojure-mode)
 (require 'clj-refactor)
 (require 'cider-eval-sexp-fu)
+(require 'flycheck)
+(require 'flycheck-clojure)
+(require 'flycheck-pos-tip)
 
 ;; Cider
 
@@ -84,12 +87,14 @@
 
 (setq-default fill-column 80)
 
-;; Flycheck
+;; Flycheck -----
+
 (eval-after-load 'flycheck '(flycheck-clojure-setup))
 ;;(add-hook 'after-init-hook #'global-flycheck-mode)
 ;;(eval-after-load 'flycheck
 ;;  '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
 
-;; Hoplon
+;; Hoplon -----
+
 (add-to-list 'auto-mode-alist '("\\.cljs\\.hl\\'" . clojure-mode))
 (add-to-list 'auto-mode-alist '("\\.boot\'" . clojure-mode))

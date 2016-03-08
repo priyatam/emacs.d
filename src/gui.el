@@ -1,3 +1,4 @@
+(require 'dired-x)
 
 ;; Resets
 
