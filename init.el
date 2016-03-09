@@ -17,6 +17,16 @@
 (set-exec-path-from-shell)
 (add-to-list 'exec-path "/usr/local/bin")
 
+;; Temporarily reduce gc at startup
+(defconst sanityinc/initial-gc-cons-threshold gc-cons-threshold
+  "Initial value of `gc-cons-threshold' at start-up time.")
+
+(setq gc-cons-threshold (* 128 1024 1024))
+
+(add-hook 'after-init-hook
+          (lambda () (setq gc-cons-threshold sanityinc/initial-gc-cons-threshold)))
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
