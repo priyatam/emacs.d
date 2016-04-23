@@ -18,3 +18,4 @@ recentf
 .cask
 /var/
 ensime
+node_modules
