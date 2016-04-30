@@ -1,8 +1,6 @@
 (require 'cider-mode)
-(require 'cider-eval-sexp-fu)
 (require 'clojure-mode)
 (require 'clj-refactor)
-(require 'cider-eval-sexp-fu)
 (require 'flycheck)
 (require 'flycheck-clojure)
 (require 'flycheck-pos-tip)
@@ -33,7 +31,6 @@
 (setq cider-switch-to-repl-command #'cider-switch-to-current-repl-buffer)
 (setq nrepl-hide-special-buffers t)
 (setq nrepl-log-messages nil)
-
 
 (show-paren-mode 1)
 
@@ -73,6 +70,10 @@
   (h4 'defun)
   (h5 'defun)
   (h6 'defun)
+  (facts 'defun)
+  (fact 'defun)
+  (deftest 'defun)
+  (testing 'defun)
   (button 'defun)
   (textarea 'defun))
 
