@@ -42,9 +42,10 @@
   (let ((use-dialog-box nil))
     ad-do-it))
 
-;; Themes -----
+;; Load Paths -----
  
 (add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/")
+(add-to-list 'load-path "~/.emacs.d/repos/")
 
 ;; Navigation -----
 
