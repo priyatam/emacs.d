@@ -21,8 +21,7 @@
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
-(setq cursor-type 'bar)
-(set-cursor-color "#ffffff")
+(setq cursor-type '(bar . 4))
 
 ;;(global-linum-mode)
 (global-set-key (kbd "C-x C-l") 'global-linum-mode)
