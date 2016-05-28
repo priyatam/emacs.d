@@ -1,6 +1,5 @@
 (require 'cider-mode)
 (require 'clojure-mode)
-(require 'clj-refactor)
 (require 'flycheck)
 (require 'flycheck-clojure)
 (require 'flycheck-pos-tip)
@@ -39,7 +38,7 @@
 
 ;; Clojure
 
-(add-to-list 'auto-mode-alist '("\\.boot\\'" . clojure-mode))
+(add-to-list 'auto-mode-alist '("\\.boot\\.cljs\\.cljc'" . clojure-mode))
 
 (add-hook 'clojure-mode-hook (lambda () (whitespace-mode t)))
 (add-hook 'clojurescript-mode-hook (lambda () (whitespace-mode t)))
