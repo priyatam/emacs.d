@@ -5,9 +5,9 @@
 
 (depends-on "bind-key")
 (depends-on "cask")
-(depends-on "cider" "0.11.0")
+(depends-on "cider")
 ;;(depends-on "cider-eval-sexp-fu")
-(depends-on "clj-refactor")
+;;(depends-on "clj-refactor")
 (depends-on "color-theme")
 (depends-on "color-theme-sanityinc-solarized")
 (depends-on "company")
