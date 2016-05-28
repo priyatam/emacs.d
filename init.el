@@ -33,10 +33,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(css-indent-offset 2)
- '(custom-enabled-themes (quote (gotham)))
+ '(custom-enabled-themes (quote (wheatgrass)))
  '(custom-safe-themes
    (quote
-	("bf25a2d5c2eddc36b2ee6fc0342201eb04ea090e637562c95b3b6e071216b524" default)))
+	("4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "8553bdd21237bcc7d9cfabd93c1525af9ac4a84d5ab1435e6474f9fd4f81d69c" "bf25a2d5c2eddc36b2ee6fc0342201eb04ea090e637562c95b3b6e071216b524" default)))
  '(fci-rule-color "#d6d6d6")
  '(js2-basic-offset 2)
  '(js2-bounce-indent-p t)
