@@ -1,15 +1,9 @@
 (source gnu)
-
 (source melpa-stable)
-;;(source marmalade)
 
 (depends-on "bind-key")
 (depends-on "cask")
 (depends-on "cider")
-;;(depends-on "cider-eval-sexp-fu")
-;;(depends-on "clj-refactor")
-(depends-on "color-theme")
-(depends-on "color-theme-sanityinc-solarized")
 (depends-on "company")
 (depends-on "dash")
 (depends-on "drag-stuff")
@@ -27,18 +21,12 @@
 (depends-on "gotham-theme")
 (depends-on "helm")
 (depends-on "helm-dash")
-(depends-on "htmlize")
 (depends-on "idle-highlight-mode")
 (depends-on "js2-mode")
 (depends-on "magit")
 (depends-on "markdown-mode")
 (depends-on "multiple-cursors")
 (depends-on "nyan-mode")
-(depends-on "org-reveal")
-(depends-on "package-build" :git "https://github.com/milkypostman/melpa" :ref "master")
-;;(depends-on "package-build")
-;;(depends-on "pallet" :git "https://github.com/rdallasgray/pallet" :ref "master")
-(depends-on "pallet")
 (depends-on "paredit")
 (depends-on "popwin")
 (depends-on "prodigy")
@@ -54,3 +42,14 @@
 (depends-on "writeroom-mode")
 (depends-on "yaml-mode")
 (depends-on "yasnippet")
+
+;; load from master -----
+
+(depends-on "package-build" :git "https://github.com/milkypostman/melpa" :ref "master")
+(depends-on "pallet" :git "https://github.com/rdallasgray/pallet" :ref "master")
+
+;; load these from melpa-unstable -----
+
+;;(source melpa)
+;;(depends-on "htmlize")
+;;(depends-on "ox-reveal")
