@@ -10,10 +10,10 @@
 (global-company-mode)
 
 (add-hook 'after-init-hook 'global-company-mode)
-(add-hook 'cider-repl-mode-hook #'paredit-mode)
 (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'clojure-mode-hook #'paredit-mode)
 (add-hook 'clojure-mode-hook #'eldoc-mode)
+(add-hook 'cider-repl-mode-hook #'paredit-mode)
 
 ;;(setq cider-auto-mode nil)
 (setq cider-interactive-eval-result-prefix ";; => ")
@@ -39,6 +39,8 @@
 ;; Clojure
 
 (add-to-list 'auto-mode-alist '("\\.boot\\.cljs\\.cljc'" . clojure-mode))
+(add-to-list 'auto-mode-alist '("\\.cljs\\.hl\\'" . clojure-mode))
+(add-to-list 'auto-mode-alist '("\\.boot\'" . clojure-mode))
 
 (add-hook 'clojure-mode-hook (lambda () (whitespace-mode t)))
 (add-hook 'clojurescript-mode-hook (lambda () (whitespace-mode t)))
@@ -76,13 +78,6 @@
   (button 'defun)
   (textarea 'defun))
 
-(defun clj-refactor-mode-hook ()
-  (clj-refactor-mode 1)
-  (yas-minor-mode 1) ; for adding require/use/import
-  (cljr-add-keybindings-with-prefix "C-c C-m"))
-
-(add-hook 'clojure-mode-hook #'clj-refactor-mode-hook)
-
 (eval-after-load 'clojure-mode
   '(progn
      (define-key clojure-mode-map (kbd "C-c C-h") #'clojure-cheatsheet)))
@@ -95,8 +90,3 @@
 ;;(add-hook 'after-init-hook #'global-flycheck-mode)
 ;;(eval-after-load 'flycheck
 ;;  '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
-
-;; Hoplon -----
-
-(add-to-list 'auto-mode-alist '("\\.cljs\\.hl\\'" . clojure-mode))
-(add-to-list 'auto-mode-alist '("\\.boot\'" . clojure-mode))
