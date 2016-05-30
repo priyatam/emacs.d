@@ -12,7 +12,8 @@
 (when (window-system)
   (set-default-font "Fira Code Light 16"))
 
-(setq-default line-spacing 3)
+;; (set-default-font "Nitti WM2 16")
+(setq-default line-spacing 1)
 
 (let ((alist '((33 . ".\\(?:\\(?:==\\)\\|[!=]\\)")
                (35 . ".\\(?:[(?[_{]\\)")
