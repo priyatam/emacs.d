@@ -48,8 +48,9 @@
 (depends-on "package-build" :git "https://github.com/milkypostman/melpa" :ref "master")
 (depends-on "pallet" :git "https://github.com/rdallasgray/pallet" :ref "master")
 
-;; load these from melpa-unstable -----
+;; uncomment and load these from melpa-unstable -----
 
 ;;(source melpa)
 ;;(depends-on "htmlize")
 ;;(depends-on "ox-reveal")
+;;(depends-on "paren-face")
