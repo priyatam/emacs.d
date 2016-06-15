@@ -73,6 +73,7 @@
   (h6 'defun)
   (facts 'defun)
   (fact 'defun)
+  (doto 'cond)
   (deftest 'defun)
   (testing 'defun)
   (button 'defun)
