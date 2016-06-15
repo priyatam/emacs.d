@@ -1,4 +1,7 @@
 (source gnu)
+
+;; load from melpa-stable -----
+
 (source melpa-stable)
 
 (depends-on "bind-key")
@@ -49,9 +52,9 @@
 (depends-on "package-build" :git "https://github.com/milkypostman/melpa" :ref "master")
 (depends-on "pallet" :git "https://github.com/rdallasgray/pallet" :ref "master")
 
-;; uncomment and load these from melpa-unstable -----
+;; load from melpa-unstable -----
 
-;;(source melpa)
-;;(depends-on "htmlize")
-;;(depends-on "ox-reveal")
-;;(depends-on "paren-face")
+(source melpa)
+(depends-on "htmlize")
+(depends-on "ox-reveal")
+(depends-on "paren-face")
