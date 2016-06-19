@@ -83,8 +83,6 @@
   '(progn
      (define-key clojure-mode-map (kbd "C-c C-h") #'clojure-cheatsheet)))
 
-(setq-default fill-column 80)
-
 ;; Flycheck -----
 
 (eval-after-load 'flycheck '(flycheck-clojure-setup))

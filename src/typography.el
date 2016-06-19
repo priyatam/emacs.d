@@ -13,7 +13,7 @@
   (set-default-font "Fira Code Light 16"))
 
 ;; (set-default-font "Nitti WM2 16")
-(setq-default line-spacing 1)
+(setq-default line-spacing 5)
 
 (let ((alist '((33 . ".\\(?:\\(?:==\\)\\|[!=]\\)")
                (35 . ".\\(?:[(?[_{]\\)")
@@ -47,7 +47,7 @@
    (define-key writeroom-mode-map (kbd "s-?") nil)
    (define-key writeroom-mode-map (kbd "C-c w") #'writeroom-toggle-mode-line))
 
-(setq writeroom-width 130)
+(setq writeroom-width 145)
 (global-set-key (kbd "C-x C-w") 'writeroom-mode)
 (global-writeroom-mode)
 (setq writeroom-major-modes '(text-mode clojure-mode clojurescript-mode))

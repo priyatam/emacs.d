@@ -5,7 +5,7 @@
 (toggle-frame-fullscreen)
 
 (setq column-number-mode t)
-(setq-default fill-column 80)
+(setq-default fill-column 120)
 (setq-default tab-width 4)
 (setq inhibit-startup-message t)
 (setq ring-bell-function 'ignore)
@@ -17,8 +17,8 @@
 ;;(if (fboundp 'fringe-mode) (fringe-mode 0))
 
 ;; Scroll one line at a time (less "jumpy" than defaults)
-(setq mouse-wheel-scroll-amount '(2 ((shift) . 2))) ;; one line at a time
-(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-scroll-amount '(2 ((shift) . 2))) ;; two lines at a time
+(setq mouse-wheel-progressive-speed 't) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 (setq cursor-type '(bar . 4))
