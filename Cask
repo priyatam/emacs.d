@@ -7,6 +7,7 @@
 (depends-on "bind-key")
 (depends-on "cask")
 (depends-on "cider")
+(depends-on "clj-refactor")
 (depends-on "company")
 (depends-on "dash")
 (depends-on "drag-stuff")
@@ -46,15 +47,17 @@
 (depends-on "writeroom-mode")
 (depends-on "yaml-mode")
 (depends-on "yasnippet")
+(depends-on "package-build")
+(depends-on "pallet")
 
 ;; load from master -----
 
-(depends-on "package-build" :git "https://github.com/milkypostman/melpa" :ref "master")
-(depends-on "pallet" :git "https://github.com/rdallasgray/pallet" :ref "master")
+;;(depends-on "package-build" :git "https://github.com/milkypostman/melpa" :ref "master")
+;;(depends-on "pallet" :git "https://github.com/rdallasgray/pallet" :ref "master")
 
 ;; load from melpa-unstable -----
 
-(source melpa)
-(depends-on "htmlize")
-(depends-on "ox-reveal")
-(depends-on "paren-face")
+;;(source melpa)
+;;(depends-on "htmlize")
+;;(depends-on "ox-reveal")
+;;(depends-on "paren-face")

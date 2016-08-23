@@ -12,7 +12,7 @@
 (load "~/.emacs.d/src/keybindings.el")
 (load "~/.emacs.d/src/js.el")
 (load "~/.emacs.d/src/markups.el")
-(load "~/.emacs.d/src/presentation.el")
+;;(load "~/.emacs.d/src/presentation.el")
 (load "~/.emacs.d/src/typography.el")
 (load "~/.emacs.d/src/utils.el")
 
