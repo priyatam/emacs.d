@@ -82,6 +82,8 @@
   (h6 'defun)
   (facts 'defun)
   (fact 'defun)
+  (when 'defun)
+  (when-not 'defun)
   (doto 'cond)
   (deftest 'defun)
   (testing 'defun)

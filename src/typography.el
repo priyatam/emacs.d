@@ -10,9 +10,9 @@
 (global-prettify-symbols-mode 1)
 
 (when (window-system)
-  (set-default-font "Fira Code Light 16"))
+  (set-default-font "Fira Code Light 15"))
 
-(setq-default line-spacing 5)
+(setq-default line-spacing 6)
 
 (let ((alist '((33 . ".\\(?:\\(?:==\\)\\|[!=]\\)")
                (35 . ".\\(?:[(?[_{]\\)")
@@ -46,7 +46,7 @@
    (define-key writeroom-mode-map (kbd "s-?") nil)
    (define-key writeroom-mode-map (kbd "C-c w") #'writeroom-toggle-mode-line))
 
-(setq writeroom-width 130)
+(setq writeroom-width 150)
 (global-set-key (kbd "C-x C-w") 'writeroom-mode)
 (global-writeroom-mode)
 (setq writeroom-major-modes '(text-mode clojure-mode clojurescript-mode))
