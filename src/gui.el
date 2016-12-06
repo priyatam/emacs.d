@@ -1,3 +1,4 @@
+
 (require 'dired-x)
 
 ;; Resets
@@ -5,7 +6,7 @@
 (toggle-frame-fullscreen)
 
 (setq column-number-mode t)
-(setq-default fill-column 80)
+(setq-default fill-column 120)
 (setq-default tab-width 4)
 (setq inhibit-startup-message t)
 (setq ring-bell-function 'ignore)
@@ -23,10 +24,11 @@
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 (setq cursor-type '(bar . 4))
 
-;;(global-linum-mode)
+(global-linum-mode)
 (global-set-key (kbd "C-x C-l") 'global-linum-mode)
+(setq linum-format "%4d \u2502 ")
 
-;;(setq golden-ratio-auto-scale t)
+(setq golden-ratio-auto-scale t)
 
 ;; Enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
