@@ -6,7 +6,7 @@
 (toggle-frame-fullscreen)
 
 (setq column-number-mode t)
-(setq-default fill-column 120)
+(setq-default fill-column 100)
 (setq-default tab-width 4)
 (setq inhibit-startup-message t)
 (setq ring-bell-function 'ignore)
@@ -50,6 +50,14 @@
 
 ;; Navigation -----
 
+;; Helm
+
+(defun pl/helm-alive-p ()
+  (if (boundp 'helm-alive-p)
+      (symbol-value 'helm-alive-p)))
+
+;;(add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
+
 ;; Autocomplete 
 (add-hook 'ido-setup-hook
           (lambda ()
@@ -63,3 +71,7 @@
 (setq ido-use-filename-at-point nil)
 
 (winner-mode)
+
+;; Cleanup
+
+(global-unset-key (kbd "C-x c"))

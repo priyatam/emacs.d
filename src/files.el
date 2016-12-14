@@ -1,3 +1,4 @@
+(require 'helm-config)
 
 ;; Encoding -----
 
@@ -31,6 +32,12 @@
       `(("." . ,(expand-file-name "~/emacs.d/backups"))))
 (setq auto-save-file-name-transforms
       `((".*" ,(expand-file-name "~/emacs.d/backups") t)))
+
+;; Helm ------
+
+(helm-mode 1)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(helm-autoresize-mode t)
 
 ;; Custom functions ----
 
