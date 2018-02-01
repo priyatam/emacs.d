@@ -10,9 +10,9 @@
 (global-prettify-symbols-mode 1)
 
 (when (window-system)
-  (set-default-font "Fira Code Light 15"))
+  (set-default-font "Fira Code Light 12"))
 
-(setq-default line-spacing 4)
+(setq-default line-spacing 6)
 
 (let ((alist '((33 . ".\\(?:\\(?:==\\)\\|[!=]\\)")
                (35 . ".\\(?:[(?[_{]\\)")

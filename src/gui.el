@@ -6,7 +6,7 @@
 (toggle-frame-fullscreen)
 
 (setq column-number-mode t)
-(setq-default fill-column 100)
+(setq-default fill-column 80)
 (setq-default tab-width 4)
 (setq inhibit-startup-message t)
 (setq ring-bell-function 'ignore)
