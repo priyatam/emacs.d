@@ -6,7 +6,8 @@
 (package-initialize)
 
 (require 'package)
-(require 'cask "/usr/local/share/emacs/site-lisp/cask/cask.el")
+;; mac (require 'cask "/usr/local/share/emacs/site-lisp/cask/cask.el")
+(require 'cask "~/.cask/cask.el")
 
 (cask-initialize)
 
@@ -30,7 +31,7 @@
 (defconst sanityinc/initial-gc-cons-threshold gc-cons-threshold
   "Initial value of `gc-cons-threshold' at start-up time.")
 
-(setq gc-cons-threshold (* 128 1024 1024))
+(setq gc-cons-threshold (* 1024 1024 1024))
 
 (add-hook 'after-init-hook
           (lambda () (setq gc-cons-threshold sanityinc/initial-gc-cons-threshold)))
