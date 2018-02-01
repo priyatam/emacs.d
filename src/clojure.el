@@ -88,7 +88,9 @@
   (deftest 'defun)
   (testing 'defun)
   (button 'defun)
-  (textarea 'defun))
+  (textarea 'defun)
+  (try 'defun)
+  (try+ 'defun))
 
 (eval-after-load 'clojure-mode
   '(progn
@@ -100,3 +102,7 @@
 ;;(add-hook 'after-init-hook #'global-flycheck-mode)
 ;;(eval-after-load 'flycheck
 ;;  '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
+
+;; Pretty Print
+
+(setq cider-pprint-fn 'fipp)
