@@ -1,4 +1,10 @@
 (require 'magit)
 
 (setq magit-highlight-whitespace nil)
-(global-set-key (kbd "C-c g") 'magit-status)
+(global-set-key (kbd "C-c b") 'magit-branch)
+(global-set-key (kbd "C-c c") 'magit-checkout)
+(global-set-key (kbd "C-c s") 'magit-status)
+(global-set-key (kbd "C-c p") 'magit-pull)
+(global-set-key (kbd "C-c C-p") 'magit-push)
+(global-set-key (kbd "C-c b") 'magit-branch)
+(global-set-key (kbd "C-c C-s") 'magit-stash)
