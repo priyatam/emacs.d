@@ -3,7 +3,7 @@
 
 ;; Resets
 
-(toggle-frame-fullscreen)
+;; (toggle-frame-fullscreen)
 
 (setq column-number-mode t)
 (setq-default fill-column 80)
