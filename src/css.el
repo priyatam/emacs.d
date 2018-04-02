@@ -1,13 +1,13 @@
 (require 'emmet-mode)
-(require 'scss-mode)
 (require 'web-mode)
+(require 'paredit)
 
-;; SCSS -----
+;; CSS -----
 
-(setq scss-sass-command "node-sass")
-(add-to-list 'auto-mode-alist '("\\.sass\\'" . scss-mode))
-(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
-(setq-default scss-compile-at-save nil)
+(autoload 'css-mode "css-mode" "Mode for editing CSS files" t)
+(setq auto-mode-alist
+      (append '(("\\.css$" . css-mode)) auto-mode-alist))
+
 
 ;; HTML -----
 
@@ -17,8 +17,6 @@
 ;; Emmet -----
 
 (add-hook 'sgml-mode-hook 'emmet-mode)
-(add-hook 'css-mode-hook  'emmet-mode)
-(add-hook 'html-mode-hook 'emmet-mode)
 
 (add-hook 'emmet-mode-hook (lambda () (setq emmet-indentation 2)))
 (setq emmet-move-cursor-between-quotes t)
