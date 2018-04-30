@@ -7,6 +7,7 @@
 
 (setq inf-clojure-repl-use-same-window nil)
 (setq inf-clojure-generic-cmd '("localhost" 5555))
+(setf inf-clojure-lein-cmd '("localhost" . 5555))
 
 ;; paredit
 (require 'paredit)
@@ -74,6 +75,6 @@
 
 (defun figwheel-repl ()
   (interactive)
-  (inf-clojure "lein trampoline run -m clojure.main dev/repl.clj"))
+  (inf-clojure "lein figwheel"))
 
 (setq clojure-align-forms-automatically t)
