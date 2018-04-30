@@ -7,7 +7,7 @@
 
 (setq inf-clojure-repl-use-same-window nil)
 (setq inf-clojure-generic-cmd '("localhost" 5555))
-(setf inf-clojure-lein-cmd '("localhost" . 5555))
+;;(setf inf-clojure-lein-cmd '("localhost" . 5555))
 
 ;; paredit
 (require 'paredit)
@@ -29,8 +29,8 @@
 (add-hook 'clojure-mode-hook #'eldoc-mode)
 
 ;; clojure specific
-(add-to-list 'auto-mode-alist '("\\.boot\'" . clojure-mode))
-
+(add-to-list 'auto-mode-alist '("\\.boot\'" . clojure-mode)
+)
 (add-hook 'clojure-mode-hook (lambda () (whitespace-mode t)))
 (add-hook 'clojurescript-mode-hook (lambda () (whitespace-mode t)))
 (setq whitespace-style '(face lines-tail trailing))
