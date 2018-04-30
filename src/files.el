@@ -29,9 +29,9 @@
 ;; Backup -----
 
 (setq backup-directory-alist
-      `(("." . ,(expand-file-name "~/emacs.d/backups"))))
+      `(("." . ,(expand-file-name "~/.emacs.d/backups"))))
 (setq auto-save-file-name-transforms
-      `((".*" ,(expand-file-name "~/emacs.d/backups") t)))
+      `((".*" ,(expand-file-name "~/.emacs.d/backups") t)))
 
 ;; Helm ------
 
