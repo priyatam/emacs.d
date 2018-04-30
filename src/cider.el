@@ -1,9 +1,6 @@
 (require 'cider-mode)
 (require 'clojure-mode)
 (require 'clj-refactor)
-(require 'flycheck)
-(require 'flycheck-clojure)
-(require 'flycheck-pos-tip)
 (require 'company)
 
 ;; Cider
@@ -95,13 +92,6 @@
 (eval-after-load 'clojure-mode
   '(progn
      (define-key clojure-mode-map (kbd "C-c C-h") #'clojure-cheatsheet)))
-
-;; Flycheck -----
-
-(eval-after-load 'flycheck '(flycheck-clojure-setup))
-;;(add-hook 'after-init-hook #'global-flycheck-mode)
-;;(eval-after-load 'flycheck
-;;  '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
 
 ;; Pretty Print
 

@@ -6,6 +6,8 @@
 
 (depends-on "bind-key")
 (depends-on "cask")
+(depends-on "cider")
+(depends-on "clj-refactor")
 (depends-on "company")
 (depends-on "dash")
 (depends-on "drag-stuff")

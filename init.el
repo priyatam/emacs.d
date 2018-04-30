@@ -11,7 +11,8 @@
 
 (cask-initialize)
 
-(load "~/.emacs.d/src/clojure.el")
+(load "~/.emacs.d/src/cider.el")
+;;(load "~/.emacs.d/src/inf-clojure.el")
 (load "~/.emacs.d/src/css.el")
 (load "~/.emacs.d/src/elisp.el")
 (load "~/.emacs.d/src/files.el")
