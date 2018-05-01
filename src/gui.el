@@ -28,7 +28,7 @@
 (global-set-key (kbd "C-x C-l") 'global-linum-mode)
 (setq linum-format "%4d \u2502 ")
 
-(setq golden-ratio-auto-scale t)
+;;(setq golden-ratio-auto-scale t)
 
 ;; Enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -75,3 +75,10 @@
 ;; Cleanup
 
 (global-unset-key (kbd "C-x c"))
+
+;; Colors
+
+(set-cursor-color "#20BBFC")
+
+;; (set-foreground-color "#E0DFDB")
+(set-background-color "#F1F1F1")
