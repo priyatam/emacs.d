@@ -14,7 +14,7 @@
 ;; Turn off mouse interface early in startup to avoid momentary display
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-;;(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 ;;(if (fboundp 'fringe-mode) (fringe-mode 0))
 
 ;; Scroll one line at a time (less "jumpy" than defaults)

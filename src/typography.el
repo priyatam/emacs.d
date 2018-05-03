@@ -49,4 +49,4 @@
 (setq writeroom-width 150)
 (global-set-key (kbd "C-x C-w") 'writeroom-mode)
 (global-writeroom-mode)
-(setq writeroom-major-modes '(text-mode clojure-mode clojurescript-mode))
+(setq writeroom-major-modes '(text-mode))
