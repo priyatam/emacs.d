@@ -26,6 +26,7 @@
 (depends-on "js2-mode")
 (depends-on "magit")
 (depends-on "markdown-mode")
+(depends-on "meghanada")
 (depends-on "paredit")
 (depends-on "prodigy")
 (depends-on "projectile")

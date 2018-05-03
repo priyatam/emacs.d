@@ -11,6 +11,7 @@
 
 (cask-initialize)
 
+(load "~/.emacs.d/src/common.el")
 (load "~/.emacs.d/src/cider.el")
 ;;(load "~/.emacs.d/src/inf-clojure.el")
 (load "~/.emacs.d/src/css.el")
@@ -18,10 +19,10 @@
 (load "~/.emacs.d/src/files.el")
 (load "~/.emacs.d/src/git.el")
 (load "~/.emacs.d/src/gui.el")
+(load "~/.emacs.d/src/java.el")
 (load "~/.emacs.d/src/keybindings.el")
 (load "~/.emacs.d/src/js.el")
 (load "~/.emacs.d/src/markups.el")
-;;(load "~/.emacs.d/src/presentation.el")
 (load "~/.emacs.d/src/typography.el")
 (load "~/.emacs.d/src/utils.el")
 
@@ -47,7 +48,7 @@
  '(custom-enabled-themes (quote (misterioso)))
  '(custom-safe-themes
    (quote
-	("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "8553bdd21237bcc7d9cfabd93c1525af9ac4a84d5ab1435e6474f9fd4f81d69c" "bf25a2d5c2eddc36b2ee6fc0342201eb04ea090e637562c95b3b6e071216b524" default)))
+	("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "8553bdd21237bcc7d9cfabd93c1525af9ac4a84d5ab1435e6474f9fd4f81d69c" "bf25a2d5c2eddc36b2ee6fc0342201eb04ea090e637562c95b3b6e071216b524" default)))
  '(fci-rule-color "#d6d6d6")
  '(js-indent-level 2)
  '(js2-bounce-indent-p t)
@@ -57,7 +58,7 @@
  '(jsx-use-flymake t)
  '(package-selected-packages
    (quote
-	(yaml-mode writeroom-mode web-mode use-package smex smart-mode-line scss-mode rainbow-delimiters projectile prodigy pos-tip paredit pallet markdown-mode magit js2-mode inf-clojure idle-highlight-mode helm-dash go-mode git-timemachine flycheck-cask expand-region exec-path-from-shell emmet-mode drag-stuff company)))
+	(indium meghanada neotree yaml-mode writeroom-mode web-mode use-package smex smart-mode-line scss-mode rainbow-delimiters projectile prodigy pos-tip paredit pallet markdown-mode magit js2-mode inf-clojure idle-highlight-mode helm-dash go-mode git-timemachine flycheck-cask expand-region exec-path-from-shell emmet-mode drag-stuff company)))
  '(web-mode-attr-indent-offset 2)
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
