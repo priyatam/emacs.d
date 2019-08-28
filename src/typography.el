@@ -1,8 +1,3 @@
-(require 'writeroom-mode)
-
-(load "~/.emacs.d/lib/typopunct.el")
-(require 'typopunct)
-
 ;; Smart line -----
 
 (setq sml/no-confirm-load-theme t)
@@ -43,40 +38,4 @@
 						  `([,(cdr char-regexp) 0 font-shape-gstring]))))
 
 
-;; Writeroom -----
-
-(add-hook 'writeroom-mode
-   (define-key writeroom-mode-map (kbd "s-?") nil)
-   (define-key writeroom-mode-map (kbd "C-c w") #'writeroom-toggle-mode-line))
-
 (setq-default fill-column 80)
-(setq writeroom-width 80)
-(global-set-key (kbd "C-x C-w") 'writeroom-mode)
-(global-writeroom-mode)
-(setq writeroom-major-modes '(text-mode))
-
-
-;; Typopunct
-
-(defconst typopunct-ellipsis (decode-char 'ucs #x2026))
-(defconst typopunct-middot   (decode-char 'ucs #x2219))
-(defun typopunct-insert-ellipsis-or-middot (arg)
-  "Change three consecutive dots to a typographical ellipsis mark."
-  (interactive "p")
-  (cond
-   ((and (= 1 arg)
-		 (eq (char-before) ?^))
-	(delete-char -1)
-	(insert typopunct-middot))
-   ((and (= 1 arg)
-		 (eq this-command last-command)
-		 (looking-back "\\.\\."))
-	(replace-match "")
-	(insert typopunct-ellipsis))
-   (t
-	(self-insert-command arg))))
-
-(define-key typopunct-map "." 'typopunct-insert-ellipsis-or-middot)
-
-
-(add-hook 'markdown-mode-hook 'init)

@@ -24,7 +24,6 @@
 (load "~/.emacs.d/src/markups.el")
 (load "~/.emacs.d/src/typography.el")
 (load "~/.emacs.d/src/utils.el")
-;; (load "~/.emacs.d/src/writing.el")
 
 (set-exec-path-from-shell)
 (add-to-list 'exec-path "/usr/local/bin")
