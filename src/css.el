@@ -1,5 +1,4 @@
 (require 'emmet-mode)
-(require 'web-mode)
 (require 'paredit)
 
 ;; CSS -----

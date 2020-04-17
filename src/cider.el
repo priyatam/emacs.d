@@ -1,6 +1,5 @@
 (require 'cider-mode)
 (require 'clojure-mode)
-;;(require 'clj-refactor)
 (require 'company)
 
 ;; Cider
@@ -98,7 +97,4 @@
            (figwheel-sidecar.repl-api/cljs-repl))")
 
 
-
 ;; hacks
-
-
