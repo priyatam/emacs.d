@@ -8,7 +8,10 @@
 (global-prettify-symbols-mode 1)
 
 (when (window-system)
-  (set-default-font "Fira Code 12"))
+;  (set-default-font "Fira Code 12")
+  )
+
+(set-frame-font "Fira Code 15" nil t)
 
 (setq-default line-spacing 6)
 
